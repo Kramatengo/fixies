@@ -105,6 +105,7 @@ create table orders
     primary key (id),
     foreign key (customer_id) references users (id),
     foreign key (executor_id) references users (id),
+    foreign key (model_id) references models (id),
     foreign key (status_id) references statuses (id)
 );
 
@@ -113,17 +114,15 @@ create table orders
 insert into users(login, password, email)
 VALUES ('master', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'master@domain.su'),   --100
        ('admin', '$2y$04$to.PaR/wcSn/b0ieuGw3ZOq2sy9BPFhjS5c3nDLUCY8yzvEW7/9K.', 'admin@domain.su'), --200
-       ('superadmin', '$2y$04$r76P41tjVWWBI8dAspu7AuqHpym86Brl1tlSJkX9eOdz.5Den4J.2', 'superadmin@domain.su'); -- 111;
+       ('user', '$2y$04$r76P41tjVWWBI8dAspu7AuqHpym86Brl1tlSJkX9eOdz.5Den4J.2', 'superadmin@domain.su'); -- 111;
 
 insert into roles(name)
 values ('ROLE_USER'),
        ('ROLE_MASTER'),
-       ('ROLE_ADMIN'),
-       ('ROLE_SEPERUSER'),
-       ('ROLE_SUPERADMIN');
+       ('ROLE_ADMIN');
 
 insert into user_roles(user_id, role_id)
 values (1, 2),
        (2, 3),
-       (3, 4);
+       (3, 1);
 
