@@ -16,7 +16,7 @@ create table users
 create table roles
 (
     id         serial,
-    name       varchar(100),
+    name       varchar(100) not null unique,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp,
     primary key (id)
