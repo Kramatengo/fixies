@@ -31,10 +31,10 @@ public class Model {
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "compatibility", joinColumns = @JoinColumn(name = "model_id"),
-//            inverseJoinColumns = @JoinColumn(name = "spare_id"))
-//    List<Spare> spares;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "compatibility", joinColumns = @JoinColumn(name = "model_id"),
+            inverseJoinColumns = @JoinColumn(name = "spare_id"))
+    List<Spare> spares;
 
     @Override
     public String toString() {

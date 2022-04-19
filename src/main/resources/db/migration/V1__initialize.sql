@@ -68,7 +68,7 @@ create table compatibility
 (
     model_id        bigint not null,
     spare_id        bigint not null,
-    used_by_default boolean default true,
+    used_by_default boolean default false,
     primary key (model_id, spare_id),
     foreign key (model_id) references models (id),
     foreign key (spare_id) references spares (id)
