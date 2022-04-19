@@ -6,29 +6,25 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "categories")
-@NoArgsConstructor
+@Table(name = "statuses")
 @Getter
 @Setter
-public class Category {
+@NoArgsConstructor
+public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Range(max = 255, message = "The length of the category name cannot exceed 255 characters!")
+    @Range(max = 255, message = "The length of the status name cannot exceed 255 characters!")
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "category")
-    private List<Model> models;
-
     @Override
     public String toString() {
-        return "Category{" +
+        return "Status{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
@@ -37,8 +33,8 @@ public class Category {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Category category)) return false;
-        return id.equals(category.id) && name.equals(category.name);
+        if (!(o instanceof Status status)) return false;
+        return id.equals(status.id) && name.equals(status.name);
     }
 
     @Override

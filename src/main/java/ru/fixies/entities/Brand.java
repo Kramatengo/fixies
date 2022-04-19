@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +22,9 @@ public class Brand {
     @Range(max = 255, message = "The length of the brands name cannot exceed 255 characters!")
     @Column(name = "name", nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "brand")
+    private List<Model> models;
 
     @Override
     public String toString() {

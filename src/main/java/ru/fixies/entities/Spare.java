@@ -6,43 +6,44 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import java.util.List;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "categories")
-@NoArgsConstructor
+@Table(name = "spares")
 @Getter
 @Setter
-public class Category {
+@NoArgsConstructor
+public class Spare {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Range(max = 255, message = "The length of the category name cannot exceed 255 characters!")
+    @Range(max = 255, message = "The length of the spare part name cannot exceed 255 characters!")
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "category")
-    private List<Model> models;
+    @Column(name = "price")
+    private BigDecimal price;
 
     @Override
     public String toString() {
-        return "Category{" +
+        return "Spare{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", price=" + price +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Category category)) return false;
-        return id.equals(category.id) && name.equals(category.name);
+        if (!(o instanceof Spare spare)) return false;
+        return id.equals(spare.id) && name.equals(spare.name) && Objects.equals(price, spare.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, price);
     }
 }
