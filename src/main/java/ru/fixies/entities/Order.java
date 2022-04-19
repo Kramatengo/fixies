@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -51,6 +52,9 @@ public class Order {
     @JoinColumn(name = "status_id", nullable = false)
     private Status status;
 
+    @OneToMany(mappedBy = "order")
+    private List<Comment> comments;
+
     @Range(max = 100, message = "The length of serial number cannot exceed 100 characters!")
     @Column(name = "serial_number")
     private String serialNumber;
@@ -70,6 +74,7 @@ public class Order {
                 ", text='" + text + '\'' +
                 ", deadline=" + deadline +
                 ", status=" + status +
+                ", comments=" + comments +
                 ", serialNumber='" + serialNumber + '\'' +
                 ", totalPrice=" + totalPrice +
                 '}';
@@ -79,11 +84,14 @@ public class Order {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Order order)) return false;
-        return id.equals(order.id) && Objects.equals(createdAt, order.createdAt) && customer.equals(order.customer) && executor.equals(order.executor) && model.equals(order.model) && subject.equals(order.subject) && text.equals(order.text) && Objects.equals(deadline, order.deadline) && status.equals(order.status) && Objects.equals(serialNumber, order.serialNumber) && Objects.equals(totalPrice, order.totalPrice);
+        return id.equals(order.id) && Objects.equals(createdAt, order.createdAt) && customer.equals(order.customer) && executor.equals(order.executor) &&
+                model.equals(order.model) && subject.equals(order.subject) && text.equals(order.text) && Objects.equals(deadline, order.deadline) &&
+                status.equals(order.status) && Objects.equals(serialNumber, order.serialNumber) && Objects.equals(totalPrice, order.totalPrice) &&
+                Objects.equals(comments, order.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createdAt, customer, executor, model, subject, text, deadline, status, serialNumber, totalPrice);
+        return Objects.hash(id, createdAt, customer, executor, model, subject, text, deadline, status, serialNumber, totalPrice, comments);
     }
 }
