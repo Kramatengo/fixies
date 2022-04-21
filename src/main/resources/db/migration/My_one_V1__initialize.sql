@@ -1,6 +1,6 @@
-create table users
-(
-    id              bigserial,
+DROP TABLE IF EXISTS users;
+CREATE TABLE IF NOT EXISTS users(
+    id              serial PRIMARY KEY,
     login           varchar(50)  not null unique,
     password        varchar(255) not null,
     first_name      varchar(150),
@@ -9,20 +9,21 @@ create table users
     email           varchar(100) not null unique,
     phone           varchar(100),
     created_at      timestamp default current_timestamp,
-    updated_at      timestamp default current_timestamp,
-    primary key (id)
+    updated_at      timestamp default current_timestamp
 );
 
-create table roles
+DROP TABLE IF EXISTS roles;
+CREATE TABLE IF NOT EXISTS roles
 (
-    id         serial,
+    id         serial PRIMARY KEY,
     name       varchar(100),
     created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp,
-    primary key (id)
+    updated_at timestamp default current_timestamp
 );
 
-create table user_roles
+DROP TABLE IF EXISTS user_roles;
+CREATE TABLE IF NOT EXISTS user_roles
+
 (
     user_id bigint not null,
     role_id int    not null,
@@ -31,40 +32,51 @@ create table user_roles
     foreign key (role_id) references roles (id)
 );
 
-create table categories
+DROP TABLE IF EXISTS categories;
+CREATE TABLE IF NOT EXISTS categories
 (
-    id      bigserial,
+    id      serial PRIMARY KEY,
     name    varchar(255) not null,
-    primary key (id)
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
 );
 
-create table brands
+DROP TABLE IF EXISTS brands;
+CREATE TABLE IF NOT EXISTS brands
 (
-    id      bigserial,
+    id      serial PRIMARY KEY,
     name    varchar(255) not null,
-    primary key (id)
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
+
 );
 
-create table models
+DROP TABLE IF EXISTS models;
+CREATE TABLE IF NOT EXISTS models
 (
-    id              bigserial,
+    id              serial PRIMARY KEY,
     category_id     bigint not null,
     brand_id        bigint not null,
     name    varchar(255) not null,
-    primary key (id),
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp,
     foreign key (category_id) references categories (id),
     foreign key (brand_id) references brands (id)
+
 );
 
-create table spares
+DROP TABLE IF EXISTS spares;
+CREATE TABLE IF NOT EXISTS spares
 (
-    id      bigserial,
+    id      serial PRIMARY KEY,
     name    varchar(255) not null,
-    price   money,
-    primary key (id)
+    price   decimal(5, 2),
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
 );
 
-create table compatibility
+DROP TABLE IF EXISTS compatibility;
+CREATE TABLE IF NOT EXISTS compatibility
 (
     model_id bigint not null,
     spare_id bigint not null,
@@ -73,25 +85,30 @@ create table compatibility
     foreign key (spare_id) references spares (id)
 );
 
-create table stock
+DROP TABLE IF EXISTS stock;
+CREATE TABLE IF NOT EXISTS stock
 (
-    id          bigserial,
+    id          serial PRIMARY KEY,
     spare_id    bigint not null,
     quantity    int,
-    primary key (id),
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp,
     foreign key (spare_id) references spares (id)
 );
 
-create table statuses
+DROP TABLE IF EXISTS statuses;
+CREATE TABLE IF NOT EXISTS statuses
 (
-    id      serial,
+    id      serial PRIMARY KEY,
     name    varchar(255) not null,
-    primary key (id)
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
 );
 
-create table orders
+DROP TABLE IF EXISTS orders;
+CREATE TABLE IF NOT EXISTS orders
 (
-    id              bigserial,
+    id              serial PRIMARY KEY,
     created_at      timestamp default current_timestamp,
     customer_id     bigint not null,
     executor_id     bigint not null,
@@ -101,8 +118,7 @@ create table orders
     deadline        timestamp,
     status_id       int not null,
     serial_number   varchar(100),
-    total_price   money,
-    primary key (id),
+    total_price   decimal(5, 2),
     foreign key (customer_id) references users (id),
     foreign key (executor_id) references users (id),
     foreign key (model_id) references models (id),
@@ -112,10 +128,8 @@ create table orders
 -- filling user and roles in tables
 
 insert into users(login, password, email)
-VALUES ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@domain.su'),   -- 100
-       ('master', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'master@domain.su'),   -- 100
+VALUES ('master', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'master@domain.su'),   -- 100
        ('admin', '$2y$04$to.PaR/wcSn/b0ieuGw3ZOq2sy9BPFhjS5c3nDLUCY8yzvEW7/9K.', 'admin@domain.su'), -- 200
-       ('superuser', '$2y$04$to.PaR/wcSn/b0ieuGw3ZOq2sy9BPFhjS5c3nDLUCY8yzvEW7/9K.', 'superuser@domain.su'), -- 200
        ('superadmin', '$2y$04$r76P41tjVWWBI8dAspu7AuqHpym86Brl1tlSJkX9eOdz.5Den4J.2', 'superadmin@domain.su'); -- 111;
 
 insert into roles(name)
@@ -126,11 +140,9 @@ values ('ROLE_USER'),
        ('ROLE_SUPERADMIN');
 
 insert into user_roles(user_id, role_id)
-values (1, 1),
-       (2, 2),
-       (3, 3),
-       (4, 4),
-       (5, 5);
+values (1, 2),
+       (2, 3),
+       (3, 4);
 
 insert into categories(name)
 values ('Стиральные машины'), ('Холодильники'), ('Пылесосы'), ('Смартфоны'), ('Телевизоры');
