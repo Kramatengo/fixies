@@ -1,22 +1,22 @@
 create table users
 (
-    id              bigserial,
-    login           varchar(50)  not null unique,
-    password        varchar(255) not null,
-    first_name      varchar(150),
-    last_name       varchar(150),
-    middle_names    varchar(150),
-    email           varchar(100) not null unique,
-    phone           varchar(100),
-    created_at      timestamp default current_timestamp,
-    updated_at      timestamp default current_timestamp,
+    id           bigserial,
+    login        varchar(50)  not null unique,
+    password     varchar(255) not null,
+    first_name   varchar(150),
+    last_name    varchar(150),
+    middle_names varchar(150),
+    email        varchar(100) not null unique,
+    phone        varchar(100),
+    created_at   timestamp default current_timestamp,
+    updated_at   timestamp default current_timestamp,
     primary key (id)
 );
 
 create table roles
 (
     id         serial,
-    name       varchar(100),
+    name       varchar(100) not null unique,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp,
     primary key (id)
@@ -33,24 +33,24 @@ create table user_roles
 
 create table categories
 (
-    id      bigserial,
-    name    varchar(255) not null,
+    id   bigserial,
+    name varchar(255) not null,
     primary key (id)
 );
 
 create table brands
 (
-    id      bigserial,
-    name    varchar(255) not null,
+    id   bigserial,
+    name varchar(255) not null,
     primary key (id)
 );
 
 create table models
 (
-    id              bigserial,
-    category_id     bigint not null,
-    brand_id        bigint not null,
-    name    varchar(255) not null,
+    id          bigserial,
+    category_id bigint       not null,
+    brand_id    bigint       not null,
+    name        varchar(255) not null,
     primary key (id),
     foreign key (category_id) references categories (id),
     foreign key (brand_id) references brands (id)
@@ -58,16 +58,17 @@ create table models
 
 create table spares
 (
-    id      bigserial,
-    name    varchar(255) not null,
-    price   money,
+    id    bigserial,
+    name  varchar(255) not null,
+    price money,
     primary key (id)
 );
 
 create table compatibility
 (
-    model_id bigint not null,
-    spare_id bigint not null,
+    model_id        bigint not null,
+    spare_id        bigint not null,
+    used_by_default boolean default false,
     primary key (model_id, spare_id),
     foreign key (model_id) references models (id),
     foreign key (spare_id) references spares (id)
@@ -75,32 +76,32 @@ create table compatibility
 
 create table stock
 (
-    id          bigserial,
-    spare_id    bigint not null,
-    quantity    int,
+    id       bigserial,
+    spare_id bigint not null,
+    quantity int,
     primary key (id),
     foreign key (spare_id) references spares (id)
 );
 
 create table statuses
 (
-    id      serial,
-    name    varchar(255) not null,
+    id   serial,
+    name varchar(255) not null,
     primary key (id)
 );
 
 create table orders
 (
-    id              bigserial,
-    created_at      timestamp default current_timestamp,
-    customer_id     bigint not null,
-    executor_id     bigint not null,
-    model_id        bigint not null,
-    subject         varchar(255) not null,
-    description     text not null,
-    deadline        timestamp,
-    status_id       int not null,
-    serial_number   varchar(100),
+    id            bigserial,
+    created_at    timestamp default current_timestamp,
+    customer_id   bigint       not null,
+    executor_id   bigint       not null,
+    model_id      bigint       not null,
+    subject       varchar(255) not null,
+    description   text         not null,
+    deadline      timestamp,
+    status_id     int          not null,
+    serial_number varchar(100),
     total_price   money,
     primary key (id),
     foreign key (customer_id) references users (id),
