@@ -2,8 +2,8 @@ package ru.fixies.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-import ru.fixies.dto.*;
-import ru.fixies.entity.*;
+import ru.fixies.dtos.*;
+import ru.fixies.model.*;
 
 @Mapper
 public interface ModelMapper {

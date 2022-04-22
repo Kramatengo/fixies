@@ -1,11 +1,11 @@
-package ru.fixies.service;
+package ru.fixies.services;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.fixies.dto.BrandDto;
-import ru.fixies.entity.Brand;
+import ru.fixies.dtos.BrandDto;
 import ru.fixies.mapper.ModelMapper;
-import ru.fixies.repository.BrandRepository;
+import ru.fixies.model.Brand;
+import ru.fixies.repositories.BrandRepository;
 
 import javax.annotation.Resource;
 import java.util.List;

@@ -34,8 +34,6 @@ public class UserRegController {
     private final UserRolesService userRolesService;
 
 
-
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 

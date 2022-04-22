@@ -1,21 +1,22 @@
-package ru.fixies.controller;
+package ru.fixies.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.fixies.dto.CategoryDto;
-import ru.fixies.service.CategoryService;
+import ru.fixies.dtos.CategoryDto;
+import ru.fixies.services.CategoryService;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
 
     @Resource
     private CategoryService categoryService;
 
-    @PostMapping("/category")
+    @PostMapping
     public ResponseEntity<CategoryDto> saveCategory(@RequestBody CategoryDto categoryDto) {
         CategoryDto save = categoryService.save(categoryDto);
 
@@ -23,18 +24,18 @@ public class CategoryController {
         return new ResponseEntity<>(saveCategory, HttpStatus.OK);
     }
 
-    @GetMapping("/categories")
+    @GetMapping
     public ResponseEntity<List<CategoryDto>> getAllCategories() {
         return new ResponseEntity<>(categoryService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/category")
-    public ResponseEntity<CategoryDto> getCategoryById(@RequestParam long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryDto> getCategoryById(@PathVariable long id) {
         return new ResponseEntity<>(categoryService.findById(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/category")
-    public ResponseEntity<HttpStatus> deleteById(@RequestParam long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable long id) {
         categoryService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -1,4 +1,4 @@
-package ru.fixies.dto;
+package ru.fixies.dtos;
 
 import lombok.Data;
 

@@ -8,13 +8,13 @@ import ru.fixies.model.User;
 @Data
 public class UserRegRequest {
 
-        private String login;
-        private String password;
-        private String firstName;
-        private String lastName;
-        private String middleNames;
-        private String email;
-        private String phone;
+    private String login;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String middleNames;
+    private String email;
+    private String phone;
 
     public UserRegRequest(User user) {
         this.login = user.getLogin();

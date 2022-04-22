@@ -1,12 +1,10 @@
-package ru.fixies.controller;
+package ru.fixies.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.fixies.dto.BrandDto;
-import ru.fixies.dto.RoleDto;
-import ru.fixies.service.BrandService;
-import ru.fixies.service.RoleService;
+import ru.fixies.dtos.RoleDto;
+import ru.fixies.services.RoleService;
 
 import javax.annotation.Resource;
 import java.util.List;

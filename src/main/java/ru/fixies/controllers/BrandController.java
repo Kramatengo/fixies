@@ -1,21 +1,22 @@
-package ru.fixies.controller;
+package ru.fixies.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.fixies.dto.BrandDto;
-import ru.fixies.service.BrandService;
+import ru.fixies.dtos.BrandDto;
+import ru.fixies.services.BrandService;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/brands")
 public class BrandController {
 
     @Resource
     private BrandService brandService;
 
-    @PostMapping("/brand")
+    @PostMapping
     public ResponseEntity<BrandDto> saveBrand(@RequestBody BrandDto brandDto) {
         BrandDto save = brandService.save(brandDto);
 
@@ -23,18 +24,18 @@ public class BrandController {
         return new ResponseEntity<>(savedBrand, HttpStatus.OK);
     }
 
-    @GetMapping("/brands")
+    @GetMapping
     public ResponseEntity<List<BrandDto>> getAllBrands() {
         return new ResponseEntity<>(brandService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/brand")
-    public ResponseEntity<BrandDto> getBrandById(@RequestParam long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<BrandDto> getBrandById(@PathVariable long id) {
         return new ResponseEntity<>(brandService.findById(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/brand")
-    public ResponseEntity<HttpStatus> deleteById(@RequestParam long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable long id) {
         brandService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

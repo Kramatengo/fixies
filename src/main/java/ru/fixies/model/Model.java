@@ -15,29 +15,26 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 public class Model {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Range(max = 255, message = "The length of the model name cannot exceed 255 characters!")
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
-    @JoinColumn(name = "brand_id", nullable = false)
-    private Brand brand;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "compatibility", joinColumns = @JoinColumn(name = "model_id"),
             inverseJoinColumns = @JoinColumn(name = "spare_id"))
     List<Spare> spares;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Range(max = 255, message = "The length of the model name cannot exceed 255 characters!")
+    @Column(name = "name", nullable = false)
+    private String name;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @JoinColumn(name = "brand_id", nullable = false)
+    private Brand brand;
     //TODO: нужны ли нам ордера в моделях?
     @OneToMany(mappedBy = "model")
     private List<Order> orders;
+
     @Override
     public String toString() {
         return "Model{" +

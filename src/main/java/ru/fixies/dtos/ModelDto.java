@@ -10,15 +10,15 @@ import ru.fixies.model.Model;
 @NoArgsConstructor
 public class ModelDto {
 
-        private Long id;
-        private Category category;
-        private Brand brand;
-        private String name;
+    private Long id;
+    private Category category;
+    private Brand brand;
+    private String name;
 
     public ModelDto(Model model) {
         this.id = model.getId();
         this.category = model.getCategory();
-        this.brand =model.getBrand();
+        this.brand = model.getBrand();
         this.name = getName();
     }
 
