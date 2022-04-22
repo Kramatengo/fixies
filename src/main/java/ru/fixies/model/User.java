@@ -1,4 +1,4 @@
-package ru.fixies.entities;
+package ru.fixies.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -62,6 +63,12 @@ public class User {
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+    // TODO: рассмотреть необходимость листов ордеров
+    @OneToMany(mappedBy = "customer")
+    private List<Order> ordersCustomers;
+
+    @OneToMany(mappedBy = "executor")
+    private List<Order> ordersExecutors;
 
     @Override
     public String toString() {

@@ -2,7 +2,7 @@ package ru.fixies.dtos;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.fixies.model.Users;
+import ru.fixies.model.User;
 
 @NoArgsConstructor
 @Data
@@ -16,7 +16,7 @@ public class UserRegRequest {
         private String email;
         private String phone;
 
-    public UserRegRequest(Users user) {
+    public UserRegRequest(User user) {
         this.login = user.getLogin();
         this.password = user.getPassword();
         this.firstName = user.getFirstName();

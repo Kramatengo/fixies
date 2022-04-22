@@ -8,10 +8,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.fixies.model.Roles;
-import ru.fixies.model.Users;
+import ru.fixies.model.Role;
+import ru.fixies.model.User;
 import ru.fixies.repositories.UserRolesRepository;
-import ru.fixies.repositories.UsersRepository;
+import ru.fixies.repositories.UserRepository;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -21,26 +21,26 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-private final UsersRepository usersRepository;
+private final UserRepository userRepository;
 private final UserRolesRepository userRolesRepository;
 
-    public Optional<Users> findByLogin(String login) {
-        return usersRepository.findByLogin(login);
+    public Optional<User> findByLogin(String login) {
+        return userRepository.findByLogin(login);
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        Users users = findByLogin(login).orElseThrow(() -> new UsernameNotFoundException(String.format("User '%s' not found", login)));
-        return new org.springframework.security.core.userdetails.User(users.getLogin(), users.getPassword(), mapRolesToAuthorities(users.getRoles()));
+        User user = findByLogin(login).orElseThrow(() -> new UsernameNotFoundException(String.format("User '%s' not found", login)));
+        return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Roles> roles) {
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
-    public Users save(Users user) {
-        return usersRepository.save(user);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
 

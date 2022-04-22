@@ -1,4 +1,4 @@
-package ru.fixies.entities;
+package ru.fixies.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,7 +35,9 @@ public class Model {
     @JoinTable(name = "compatibility", joinColumns = @JoinColumn(name = "model_id"),
             inverseJoinColumns = @JoinColumn(name = "spare_id"))
     List<Spare> spares;
-
+    //TODO: нужны ли нам ордера в моделях?
+    @OneToMany(mappedBy = "model")
+    private List<Order> orders;
     @Override
     public String toString() {
         return "Model{" +

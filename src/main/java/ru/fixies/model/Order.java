@@ -1,4 +1,4 @@
-package ru.fixies.entities;
+package ru.fixies.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,8 +42,8 @@ public class Order {
     @Column(name = "subject", nullable = false)
     private String subject;
 
-    @Column(name = "text", nullable = false)
-    private String text;
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @Column(name = "deadline")
     private LocalDateTime deadline;
@@ -71,7 +71,7 @@ public class Order {
                 ", executor=" + executor +
                 ", model=" + model +
                 ", subject='" + subject + '\'' +
-                ", text='" + text + '\'' +
+                ", description='" + description + '\'' +
                 ", deadline=" + deadline +
                 ", status=" + status +
                 ", comments=" + comments +
@@ -85,13 +85,13 @@ public class Order {
         if (this == o) return true;
         if (!(o instanceof Order order)) return false;
         return id.equals(order.id) && Objects.equals(createdAt, order.createdAt) && customer.equals(order.customer) && executor.equals(order.executor) &&
-                model.equals(order.model) && subject.equals(order.subject) && text.equals(order.text) && Objects.equals(deadline, order.deadline) &&
+                model.equals(order.model) && subject.equals(order.subject) && description.equals(order.description) && Objects.equals(deadline, order.deadline) &&
                 status.equals(order.status) && Objects.equals(serialNumber, order.serialNumber) && Objects.equals(totalPrice, order.totalPrice) &&
                 Objects.equals(comments, order.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createdAt, customer, executor, model, subject, text, deadline, status, serialNumber, totalPrice, comments);
+        return Objects.hash(id, createdAt, customer, executor, model, subject, description, deadline, status, serialNumber, totalPrice, comments);
     }
 }

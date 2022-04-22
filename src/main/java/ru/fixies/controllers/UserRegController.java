@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.fixies.dtos.UserRegRequest;
 import ru.fixies.exceptions.DataValidationException;
+import ru.fixies.model.Role;
+import ru.fixies.model.User;
 import ru.fixies.model.UserRoles;
-import ru.fixies.model.Users;
 import ru.fixies.services.RoleService;
 import ru.fixies.services.UserRolesService;
 import ru.fixies.services.UserService;
@@ -43,7 +44,7 @@ public class UserRegController {
         if (bindingResult.hasErrors()) {
             throw new DataValidationException(bindingResult.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList()));
         }
-        Users user = new Users();
+        User user = new User();
         user.setLogin(userRegRequest.getLogin());
         user.setFirstName(userRegRequest.getFirstName());
         user.setLastName(userRegRequest.getLastName());
@@ -55,7 +56,7 @@ public class UserRegController {
 
         UserRoles userRole = new UserRoles();
         userRole.setUserId(user.getId());
-        userRole.setRoleId(roleService.findByRoleName(INITIAL_USER_ROLE).stream().map(role -> role.getId()).collect(Collectors.toList()).get(0));
+        userRole.setRoleId(roleService.findByRoleName(INITIAL_USER_ROLE).stream().map(Role::getId).toList().get(0));
         userRolesService.save(userRole);
 
         return new UserRegRequest(user);

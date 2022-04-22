@@ -1,4 +1,4 @@
-package ru.fixies.entities;
+package ru.fixies.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.Objects;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Range(max = 100, message = "The length of the role name  cannot exceed 100 characters!")
     @Column(name = "name")

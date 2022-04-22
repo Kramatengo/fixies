@@ -1,4 +1,4 @@
-package ru.fixies.entities;
+package ru.fixies.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,25 +6,29 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "statuses")
+@Table(name = "categories")
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-public class Status {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Range(max = 255, message = "The length of the status name cannot exceed 255 characters!")
+    @Range(max = 255, message = "The length of the category name cannot exceed 255 characters!")
     @Column(name = "name", nullable = false)
     private String name;
 
+    @OneToMany(mappedBy = "category")
+    private List<Model> models;
+
     @Override
     public String toString() {
-        return "Status{" +
+        return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
@@ -33,8 +37,8 @@ public class Status {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Status status)) return false;
-        return id.equals(status.id) && name.equals(status.name);
+        if (!(o instanceof Category category)) return false;
+        return id.equals(category.id) && name.equals(category.name);
     }
 
     @Override
