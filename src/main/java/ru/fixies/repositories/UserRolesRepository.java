@@ -2,7 +2,7 @@ package ru.fixies.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.fixies.model.UserRoles;
+import ru.fixies.models.UserRoles;
 
 import java.util.Optional;
 

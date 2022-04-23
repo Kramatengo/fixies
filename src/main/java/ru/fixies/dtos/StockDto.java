@@ -2,8 +2,8 @@ package ru.fixies.dtos;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.fixies.model.Spare;
-import ru.fixies.model.Stock;
+import ru.fixies.models.Spare;
+import ru.fixies.models.Stock;
 
 import java.time.LocalDateTime;
 

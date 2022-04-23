@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.fixies.dtos.CategoryDto;
 import ru.fixies.mapper.ModelMapper;
-import ru.fixies.model.Category;
+import ru.fixies.models.Category;
 import ru.fixies.repositories.CategoryRepository;
 
 import javax.annotation.Resource;

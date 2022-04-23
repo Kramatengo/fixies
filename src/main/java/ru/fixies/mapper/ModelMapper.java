@@ -3,7 +3,7 @@ package ru.fixies.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import ru.fixies.dtos.*;
-import ru.fixies.model.*;
+import ru.fixies.models.*;
 
 @Mapper
 public interface ModelMapper {

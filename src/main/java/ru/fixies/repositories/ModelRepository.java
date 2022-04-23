@@ -5,9 +5,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.fixies.model.Brand;
-import ru.fixies.model.Category;
-import ru.fixies.model.Model;
+import ru.fixies.models.Brand;
+import ru.fixies.models.Category;
+import ru.fixies.models.Model;
 
 import java.util.List;
 import java.util.Optional;

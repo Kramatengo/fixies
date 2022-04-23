@@ -2,7 +2,7 @@ package ru.fixies.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.fixies.model.UserRoles;
+import ru.fixies.models.UserRoles;
 import ru.fixies.repositories.UserRolesRepository;
 
 @Service

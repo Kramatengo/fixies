@@ -2,7 +2,7 @@ package ru.fixies.dtos;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.fixies.model.User;
+import ru.fixies.models.User;
 
 @NoArgsConstructor
 @Data

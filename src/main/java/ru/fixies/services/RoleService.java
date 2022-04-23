@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.fixies.dtos.RoleDto;
 import ru.fixies.mapper.ModelMapper;
-import ru.fixies.model.Role;
+import ru.fixies.models.Role;
 import ru.fixies.repositories.RoleRepository;
 
 import java.util.List;

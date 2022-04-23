@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.fixies.dtos.BrandDto;
 import ru.fixies.mapper.ModelMapper;
-import ru.fixies.model.Brand;
+import ru.fixies.models.Brand;
 import ru.fixies.repositories.BrandRepository;
 
 import javax.annotation.Resource;

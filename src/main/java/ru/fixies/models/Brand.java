@@ -1,4 +1,4 @@
-package ru.fixies.model;
+package ru.fixies.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,25 +10,25 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "brands")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Category {
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Range(max = 255, message = "The length of the category name cannot exceed 255 characters!")
+    @Range(max = 255, message = "The length of the brands name cannot exceed 255 characters!")
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "brand")
     private List<Model> models;
 
     @Override
     public String toString() {
-        return "Category{" +
+        return "Brand{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
@@ -37,8 +37,8 @@ public class Category {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Category category)) return false;
-        return id.equals(category.id) && name.equals(category.name);
+        if (!(o instanceof Brand brand)) return false;
+        return id.equals(brand.id) && name.equals(brand.name);
     }
 
     @Override

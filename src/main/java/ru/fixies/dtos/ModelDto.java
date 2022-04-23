@@ -2,9 +2,9 @@ package ru.fixies.dtos;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.fixies.model.Brand;
-import ru.fixies.model.Category;
-import ru.fixies.model.Model;
+import ru.fixies.models.Brand;
+import ru.fixies.models.Category;
+import ru.fixies.models.Model;
 
 @Data
 @NoArgsConstructor

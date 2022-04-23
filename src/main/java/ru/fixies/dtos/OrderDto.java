@@ -2,10 +2,10 @@ package ru.fixies.dtos;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.fixies.model.Model;
-import ru.fixies.model.Order;
-import ru.fixies.model.Status;
-import ru.fixies.model.User;
+import ru.fixies.models.Model;
+import ru.fixies.models.Order;
+import ru.fixies.models.Status;
+import ru.fixies.models.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

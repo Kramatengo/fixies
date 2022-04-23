@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.fixies.dtos.UserDto;
 import ru.fixies.mapper.ModelMapper;
-import ru.fixies.model.Role;
-import ru.fixies.model.User;
+import ru.fixies.models.Role;
+import ru.fixies.models.User;
 import ru.fixies.repositories.UserRepository;
 import ru.fixies.repositories.UserRolesRepository;
 

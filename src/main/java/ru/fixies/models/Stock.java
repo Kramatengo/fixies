@@ -1,4 +1,4 @@
-package ru.fixies.model;
+package ru.fixies.models;
 
 
 import lombok.Data;
