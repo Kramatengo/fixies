@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.fixies.dtos.ModelDto;
+import ru.fixies.mapper.ModelMapper;
 import ru.fixies.services.ModelService;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class ModelController {
         if (pageIndex < 1) {
             pageIndex = 1;
         }
-        return modelService.findAllModels(pageIndex - 1, 20).map(ModelDto::new);
+        return modelService.findAllModels(pageIndex - 1, 20).map(ModelMapper.INSTANCE::modelToDto);
     }
 
     @PostMapping

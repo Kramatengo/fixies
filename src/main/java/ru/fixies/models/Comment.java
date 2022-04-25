@@ -13,7 +13,6 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @ToString
-@RequiredArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

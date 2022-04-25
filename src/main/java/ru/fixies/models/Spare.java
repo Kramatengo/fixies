@@ -15,7 +15,6 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @ToString
-@RequiredArgsConstructor
 public class Spare {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

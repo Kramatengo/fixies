@@ -1,7 +1,9 @@
 package ru.fixies.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import ru.fixies.models.Brand;
 import ru.fixies.models.Category;
 import ru.fixies.models.Model;
@@ -14,12 +16,5 @@ public class ModelDto {
     private Category category;
     private Brand brand;
     private String name;
-
-    public ModelDto(Model model) {
-        this.id = model.getId();
-        this.category = model.getCategory();
-        this.brand = model.getBrand();
-        this.name = getName();
-    }
 
 }

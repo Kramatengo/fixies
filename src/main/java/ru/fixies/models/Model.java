@@ -13,7 +13,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @ToString
 public class Model {
     @ManyToMany(fetch = FetchType.LAZY)
@@ -40,6 +39,7 @@ public class Model {
     private Brand brand;
     //TODO: нужны ли нам ордера в моделях?
     @OneToMany(mappedBy = "model")
+    @ToString.Exclude
     private List<Order> orders;
 
     @Override

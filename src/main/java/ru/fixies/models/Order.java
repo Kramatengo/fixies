@@ -16,7 +16,6 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @ToString
-@RequiredArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

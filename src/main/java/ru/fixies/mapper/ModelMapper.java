@@ -1,7 +1,8 @@
 package ru.fixies.mapper;
 
-import org.mapstruct.Mapper;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
+import ru.fixies.dt.SpareDto;
 import ru.fixies.dtos.*;
 import ru.fixies.models.*;
 
@@ -29,4 +30,16 @@ public interface ModelMapper {
     Role dtoToRole(RoleDto roleDto);
 
     RoleDto roleToDto(Role role);
+
+    Spare spareDtoToSpare(SpareDto spareDto);
+
+    SpareDto spareToSpareDto(Spare spare);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateSpareFromSpareDto(SpareDto spareDto, @MappingTarget Spare spare);
+
+    @AfterMapping
+    default void linkStocks(@MappingTarget Spare spare) {
+        spare.getStocks().forEach(stock -> stock.setSpare(spare));
+    }
 }

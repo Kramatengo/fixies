@@ -13,7 +13,6 @@ import java.util.Objects;
 @Setter
 @ToString
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
