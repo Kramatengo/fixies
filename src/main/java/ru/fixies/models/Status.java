@@ -1,9 +1,7 @@
 package ru.fixies.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.validator.constraints.Range;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,36 +11,33 @@ import java.util.Objects;
 @Table(name = "statuses")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
 
-    @Range(max = 255, message = "The length of the status name cannot exceed 255 characters!")
+    @Length(max = 255, message = "The length of the status name cannot exceed 255 characters!")
     @Column(name = "name", nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "status")
+    @ToString.Exclude
     private List<Order> orders;
-
-    @Override
-    public String toString() {
-        return "Status{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Status status)) return false;
-        return id.equals(status.id) && name.equals(status.name);
+        if (o == null || getClass() != o.getClass()) return false;
+        Status status = (Status) o;
+        return id != null && Objects.equals(id, status.id) && Objects.equals(name, status.name) && Objects.equals(orders, status.orders);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, orders);
     }
 }

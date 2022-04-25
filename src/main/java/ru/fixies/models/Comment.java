@@ -1,8 +1,6 @@
 package ru.fixies.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -14,12 +12,15 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
+@RequiredArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @ToString.Exclude
     @JoinColumn(name = "order_id")
     private Order order;
 
@@ -31,25 +32,17 @@ public class Comment {
     private LocalDateTime createdAt;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @ToString.Exclude
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", order=" + order +
-                ", text='" + text + '\'' +
-                ", createdAt=" + createdAt +
-                ", user=" + user +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Comment comment)) return false;
-        return id.equals(comment.id) && order.equals(comment.order) && Objects.equals(text, comment.text) && Objects.equals(createdAt, comment.createdAt) && user.equals(comment.user);
+        return id != null && Objects.equals(id, comment.id) && Objects.equals(order, comment.order) && Objects.equals(text, comment.text) &&
+                Objects.equals(createdAt, comment.createdAt) && Objects.equals(user, comment.user);
     }
 
     @Override

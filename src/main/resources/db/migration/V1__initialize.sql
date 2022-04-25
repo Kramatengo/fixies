@@ -34,14 +34,14 @@ create table user_roles
 create table categories
 (
     id   bigserial,
-    name varchar(255) not null,
+    name varchar(255) not null unique,
     primary key (id)
 );
 
 create table brands
 (
     id   bigserial,
-    name varchar(255) not null,
+    name varchar(255) not null unique,
     primary key (id)
 );
 
@@ -110,12 +110,24 @@ create table orders
     foreign key (status_id) references statuses (id)
 );
 
+create table comments
+(
+    id         bigserial,
+    created_at timestamp default current_timestamp,
+    text       text,
+    order_id   bigint not null,
+    user_id    bigint not null,
+    primary key (id),
+    foreign key (order_id) references orders (id),
+    foreign key (user_id) references users (id)
+);
+
 -- filling user and roles in tables
 
 insert into users(login, password, email)
-VALUES ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@domain.su'),   -- 100
-       ('master', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'master@domain.su'),   -- 100
-       ('admin', '$2y$04$to.PaR/wcSn/b0ieuGw3ZOq2sy9BPFhjS5c3nDLUCY8yzvEW7/9K.', 'admin@domain.su'), -- 200
+VALUES ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@domain.su'),           -- 100
+       ('master', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'master@domain.su'),       -- 100
+       ('admin', '$2y$04$to.PaR/wcSn/b0ieuGw3ZOq2sy9BPFhjS5c3nDLUCY8yzvEW7/9K.', 'admin@domain.su'),         -- 200
        ('superuser', '$2y$04$to.PaR/wcSn/b0ieuGw3ZOq2sy9BPFhjS5c3nDLUCY8yzvEW7/9K.', 'superuser@domain.su'), -- 200
        ('superadmin', '$2y$04$r76P41tjVWWBI8dAspu7AuqHpym86Brl1tlSJkX9eOdz.5Den4J.2', 'superadmin@domain.su'); -- 111;
 
@@ -134,41 +146,52 @@ values (1, 1),
        (5, 5);
 
 insert into categories(name)
-values ('Стиральные машины'), ('Холодильники'), ('Пылесосы'), ('Смартфоны'), ('Телевизоры');
+values ('Стиральные машины'),
+       ('Холодильники'),
+       ('Пылесосы'),
+       ('Смартфоны'),
+       ('Телевизоры');
 
 insert into brands(name)
-values ('LG'), ('Bosch'),
-       ('BBK'), ('Xiaomi'), ('Stinol'),
-       ('Atlant'), ('Ariston'), ('Beko'),
-       ('ZTE'), ('Samsung'), ('Realme'),
+values ('LG'),
+       ('Bosch'),
+       ('BBK'),
+       ('Xiaomi'),
+       ('Stinol'),
+       ('Atlant'),
+       ('Ariston'),
+       ('Beko'),
+       ('ZTE'),
+       ('Samsung'),
+       ('Realme'),
        ('Huawei');
 
 insert into models(category_id, brand_id, name)
-values (1, 1, 'F2M5WS4W'),  -- стиральная машина LG
-       (1, 2, 'WGA142X6OE'),  -- стиральная машина Bosch
-       (1, 7, 'BWSD 61051 1'),  -- стиральная машина Ariston
-       (1, 8, 'WRE6512BWW'),  -- стиральная машина Beko
-       (2, 1, 'GA-B379SLUL'),  -- холодильник LG
-       (2, 2, 'KGN39VK25R'),  -- холодильник Bosch
-       (2, 5, 'STS 185 S'),  -- холодильник Stinol
-       (2, 6, 'XM-6025-031'),  -- холодильник Atlant
-       (2, 7, 'ITR 4180 W'),  -- холодильник Indesit
-       (2, 8, 'RCNK335K00W'),  -- холодильник Beko
-       (3, 1, 'VK76A09NTCR'),  -- пылесос cleaner LG
-       (3, 2, 'BGL35MOV27'),  -- пылесос cleaner Bosch
-       (3, 3, 'BV1507'),  -- пылесос cleaner BBK
-       (3, 4, 'Mi Robot Vacuum Mop P'),  -- пылесос cleaner Xiaomi
-       (4, 4, 'Redmi 9A 32Gb'),  -- смартфон Xiaomi
-       (4, 9, 'Blade A3 2020 NFC 32Gb'), -- смартфон ZTE
-       (4, 10, 'Galaxy A32 64Gb SM-A325F'),  -- смартфон Samsung
-       (4, 11, 'C21Y 4/64Gb'),  -- смартфон Realme
-       (5, 1, '32LM6350PLA'),  -- телевизор LG
-       (5, 3, '32LEX-7162/TS2C'),  -- телевизор BBK
-       (5, 4, 'MI TV 32 P1'),  -- телевизор Xiaomi
-       (5, 12, 'Vision S, 55');  -- телевизор Huawei
+values (1, 1, 'F2M5WS4W'),                  -- стиральная машина LG
+       (1, 2, 'WGA142X6OE'),                -- стиральная машина Bosch
+       (1, 7, 'BWSD 61051 1'),              -- стиральная машина Ariston
+       (1, 8, 'WRE6512BWW'),                -- стиральная машина Beko
+       (2, 1, 'GA-B379SLUL'),               -- холодильник LG
+       (2, 2, 'KGN39VK25R'),                -- холодильник Bosch
+       (2, 5, 'STS 185 S'),                 -- холодильник Stinol
+       (2, 6, 'XM-6025-031'),               -- холодильник Atlant
+       (2, 7, 'ITR 4180 W'),                -- холодильник Indesit
+       (2, 8, 'RCNK335K00W'),               -- холодильник Beko
+       (3, 1, 'VK76A09NTCR'),               -- пылесос cleaner LG
+       (3, 2, 'BGL35MOV27'),                -- пылесос cleaner Bosch
+       (3, 3, 'BV1507'),                    -- пылесос cleaner BBK
+       (3, 4, 'Mi Robot Vacuum Mop P'),     -- пылесос cleaner Xiaomi
+       (4, 4, 'Redmi 9A 32Gb'),             -- смартфон Xiaomi
+       (4, 9, 'Blade A3 2020 NFC 32Gb'),    -- смартфон ZTE
+       (4, 10, 'Galaxy A32 64Gb SM-A325F'), -- смартфон Samsung
+       (4, 11, 'C21Y 4/64Gb'),              -- смартфон Realme
+       (5, 1, '32LM6350PLA'),               -- телевизор LG
+       (5, 3, '32LEX-7162/TS2C'),           -- телевизор BBK
+       (5, 4, 'MI TV 32 P1'),               -- телевизор Xiaomi
+       (5, 12, 'Vision S, 55'); -- телевизор Huawei
 
 insert into spares(name)
-values ('Помпа СМ'),  -- стиральная машина
+values ('Помпа СМ'), -- стиральная машина
        ('Плата управления СМ'),
        ('Компрессор холодильника'),
        ('Плата управления холодильника'),
@@ -251,7 +274,7 @@ values (1, 100),
        (12, 100);
 
 insert into statuses(name)
-values('Зарегистрирован'),
+values ('Зарегистрирован'),
        ('Принят в работу'),
        ('Диагностика'),
        ('В процессе ремонта'),

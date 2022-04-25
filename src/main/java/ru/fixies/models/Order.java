@@ -1,10 +1,8 @@
 package ru.fixies.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -17,6 +15,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
+@RequiredArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,18 +27,21 @@ public class Order {
     private LocalDateTime createdAt;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @ToString.Exclude
     @JoinColumn(name = "customer_id", nullable = false)
     private User customer;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @ToString.Exclude
     @JoinColumn(name = "executor_id", nullable = false)
     private User executor;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @ToString.Exclude
     @JoinColumn(name = "model_id", nullable = false)
     private Model model;
 
-    @Range(max = 255, message = "Subject length cannot exceed 255 characters!")
+    @Length(max = 255, message = "Subject length cannot exceed 255 characters!")
     @Column(name = "subject", nullable = false)
     private String subject;
 
@@ -49,13 +52,15 @@ public class Order {
     private LocalDateTime deadline;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @ToString.Exclude
     @JoinColumn(name = "status_id", nullable = false)
     private Status status;
 
     @OneToMany(mappedBy = "order")
+    @ToString.Exclude
     private List<Comment> comments;
 
-    @Range(max = 100, message = "The length of serial number cannot exceed 100 characters!")
+    @Length(max = 100, message = "The length of serial number cannot exceed 100 characters!")
     @Column(name = "serial_number")
     private String serialNumber;
 
@@ -63,35 +68,18 @@ public class Order {
     private BigDecimal totalPrice;
 
     @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", createdAt=" + createdAt +
-                ", customer=" + customer +
-                ", executor=" + executor +
-                ", model=" + model +
-                ", subject='" + subject + '\'' +
-                ", description='" + description + '\'' +
-                ", deadline=" + deadline +
-                ", status=" + status +
-                ", comments=" + comments +
-                ", serialNumber='" + serialNumber + '\'' +
-                ", totalPrice=" + totalPrice +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Order order)) return false;
-        return id.equals(order.id) && Objects.equals(createdAt, order.createdAt) && customer.equals(order.customer) && executor.equals(order.executor) &&
-                model.equals(order.model) && subject.equals(order.subject) && description.equals(order.description) && Objects.equals(deadline, order.deadline) &&
-                status.equals(order.status) && Objects.equals(serialNumber, order.serialNumber) && Objects.equals(totalPrice, order.totalPrice) &&
-                Objects.equals(comments, order.comments);
+        return id != null && Objects.equals(id, order.id) && Objects.equals(createdAt, order.createdAt) && Objects.equals(customer, order.customer) &&
+                Objects.equals(executor, order.executor) && Objects.equals(model, order.model) && Objects.equals(subject, order.subject) &&
+                Objects.equals(description, order.description) && Objects.equals(deadline, order.deadline) && Objects.equals(status, order.status) &&
+                Objects.equals(comments, order.comments) && Objects.equals(serialNumber, order.serialNumber) && Objects.equals(totalPrice, order.totalPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createdAt, customer, executor, model, subject, description, deadline, status, serialNumber, totalPrice, comments);
+        return Objects.hash(id, createdAt, customer, executor, model, subject, description, deadline, status, comments,
+                serialNumber, totalPrice);
     }
 }

@@ -1,9 +1,7 @@
 package ru.fixies.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.validator.constraints.Range;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,35 +12,30 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
+@RequiredArgsConstructor
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Range(max = 255, message = "The length of the category name cannot exceed 255 characters!")
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
+    @Length(max = 255, message = "The length of the category name cannot exceed 255 characters!")
     private String name;
 
     @OneToMany(mappedBy = "category")
+    @ToString.Exclude
     private List<Model> models;
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Category category)) return false;
-        return id.equals(category.id) && name.equals(category.name);
+        return id != null && Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(models, category.models);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, models);
     }
 }

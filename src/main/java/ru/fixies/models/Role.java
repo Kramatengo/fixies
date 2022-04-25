@@ -1,11 +1,9 @@
 package ru.fixies.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,13 +14,15 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
+@RequiredArgsConstructor
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Range(max = 100, message = "The length of the role name  cannot exceed 100 characters!")
-    @Column(name = "name")
+    @Length(max = 100, message = "The length of the role name  cannot exceed 100 characters!")
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @CreationTimestamp
@@ -34,20 +34,11 @@ public class Role {
     private LocalDateTime updatedAt;
 
     @Override
-    public String toString() {
-        return "Roles{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Role roles)) return false;
-        return id.equals(roles.id) && Objects.equals(name, roles.name) && Objects.equals(createdAt, roles.createdAt) && Objects.equals(updatedAt, roles.updatedAt);
+        return id != null && Objects.equals(id, roles.id) && Objects.equals(name, roles.name) && Objects.equals(createdAt, roles.createdAt) &&
+                Objects.equals(updatedAt, roles.updatedAt);
     }
 
     @Override

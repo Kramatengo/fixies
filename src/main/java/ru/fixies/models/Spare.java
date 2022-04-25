@@ -1,8 +1,7 @@
 package ru.fixies.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -15,12 +14,14 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
+@RequiredArgsConstructor
 public class Spare {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Range(max = 255, message = "The length of the spare part name cannot exceed 255 characters!")
+    @Length(max = 255, message = "The length of the spare part name cannot exceed 255 characters!")
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -28,26 +29,19 @@ public class Spare {
     private BigDecimal price;
 
     @OneToMany(mappedBy = "spare")
+    @ToString.Exclude
     private List<Stock> stocks;
-
-    @Override
-    public String toString() {
-        return "Spare{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Spare spare)) return false;
-        return id.equals(spare.id) && name.equals(spare.name) && Objects.equals(price, spare.price);
+        return id != null && Objects.equals(id, spare.id) && name.equals(spare.name) && Objects.equals(price, spare.price) &&
+                stocks.equals(spare.stocks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price);
+        return Objects.hash(id, name, price, stocks);
     }
 }
