@@ -2,7 +2,7 @@ package ru.fixies.mapper;
 
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
-import ru.fixies.dt.SpareDto;
+import ru.fixies.dtos.SpareDto;
 import ru.fixies.dtos.*;
 import ru.fixies.models.*;
 

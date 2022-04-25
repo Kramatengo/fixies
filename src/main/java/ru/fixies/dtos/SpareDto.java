@@ -1,4 +1,4 @@
-package ru.fixies.dt;
+package ru.fixies.dtos;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
