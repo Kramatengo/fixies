@@ -26,12 +26,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ModelService {
 
-    public final ModelRepository modelRepository;
-    @Resource
-    private BrandRepository brandRepository;
-
-    @Resource
-    private CategoryRepository categoryRepository;
+    private final ModelRepository modelRepository;
+    private final BrandRepository brandRepository;
+    private final CategoryRepository categoryRepository;
 
     public Page<Model> findAllModels(int pageIndex, int pageSize) {
         return modelRepository.findAllModels(PageRequest.of(pageIndex, pageSize));

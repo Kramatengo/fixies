@@ -9,11 +9,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "categories")
-@NoArgsConstructor
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

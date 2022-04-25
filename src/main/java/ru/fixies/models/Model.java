@@ -12,31 +12,37 @@ import java.util.Objects;
 @Table(name = "models")
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 public class Model {
-    @ManyToMany(fetch = FetchType.LAZY)
-    @ToString.Exclude
-    @JoinTable(name = "compatibility", joinColumns = @JoinColumn(name = "model_id"),
-            inverseJoinColumns = @JoinColumn(name = "spare_id"))
-    List<Spare> spares;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @JoinColumn(name = "category_id", nullable = false)
+    @ToString.Exclude
+    @NotNull
+    private Category category;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @JoinColumn(name = "brand_id", nullable = false)
+    @ToString.Exclude
+    @NotNull
+    private Brand brand;
+
     @Length(max = 255, message = "The length of the model name cannot exceed 255 characters!")
     @Column(name = "name", nullable = false)
     @NotNull
     private String name;
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "compatibility", joinColumns = @JoinColumn(name = "model_id"),
+            inverseJoinColumns = @JoinColumn(name = "spare_id"))
     @ToString.Exclude
-    @JoinColumn(name = "category_id", nullable = false)
-    @NotNull
-    private Category category;
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
-    @ToString.Exclude
-    @JoinColumn(name = "brand_id", nullable = false)
-    @NotNull
-    private Brand brand;
+    List<Spare> spares;
+
     //TODO: нужны ли нам ордера в моделях?
     @OneToMany(mappedBy = "model")
     @ToString.Exclude

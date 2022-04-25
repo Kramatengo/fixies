@@ -15,9 +15,10 @@ import java.util.Set;
 @Table(name = "Users")
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -63,6 +64,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     @ToString.Exclude
     private Set<Role> roles;
+
     // TODO: рассмотреть необходимость листов ордеров
     @OneToMany(mappedBy = "customer")
     @ToString.Exclude

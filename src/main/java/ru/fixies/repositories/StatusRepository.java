@@ -7,5 +7,4 @@ import ru.fixies.models.Status;
 @Repository
 public interface StatusRepository extends JpaRepository<Status, Long> {
 
-
 }

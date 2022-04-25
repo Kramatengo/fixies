@@ -13,9 +13,10 @@ import java.util.Objects;
 @Table(name = "spares")
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 public class Spare {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

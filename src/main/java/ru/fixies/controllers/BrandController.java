@@ -1,20 +1,20 @@
 package ru.fixies.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.fixies.dtos.BrandDto;
 import ru.fixies.services.BrandService;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/brands")
+@RequiredArgsConstructor
 public class BrandController {
 
-    @Resource
-    private BrandService brandService;
+    private final BrandService brandService;
 
     @PostMapping
     public ResponseEntity<BrandDto> saveBrand(@RequestBody BrandDto brandDto) {

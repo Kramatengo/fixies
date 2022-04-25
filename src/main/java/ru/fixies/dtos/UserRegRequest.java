@@ -4,8 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.fixies.models.User;
 
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 public class UserRegRequest {
 
     private String login;

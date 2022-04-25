@@ -13,17 +13,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@Slf4j
 @EnableWebSecurity
 @RequiredArgsConstructor
-@Slf4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtRequestFilter jwtRequestFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
+        http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().permitAll()
@@ -48,5 +47,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
 }

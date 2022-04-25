@@ -14,9 +14,10 @@ import java.util.Objects;
 @Table(name = "orders")
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,18 +27,18 @@ public class Order {
     private LocalDateTime createdAt;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
-    @ToString.Exclude
     @JoinColumn(name = "customer_id", nullable = false)
+    @ToString.Exclude
     private User customer;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
-    @ToString.Exclude
     @JoinColumn(name = "executor_id", nullable = false)
+    @ToString.Exclude
     private User executor;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
-    @ToString.Exclude
     @JoinColumn(name = "model_id", nullable = false)
+    @ToString.Exclude
     private Model model;
 
     @Length(max = 255, message = "Subject length cannot exceed 255 characters!")
@@ -51,8 +52,8 @@ public class Order {
     private LocalDateTime deadline;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
-    @ToString.Exclude
     @JoinColumn(name = "status_id", nullable = false)
+    @ToString.Exclude
     private Status status;
 
     @OneToMany(mappedBy = "order")

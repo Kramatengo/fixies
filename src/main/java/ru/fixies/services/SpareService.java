@@ -10,5 +10,4 @@ public class SpareService {
 
     private final SpareRepository spareRepository;
 
-
 }

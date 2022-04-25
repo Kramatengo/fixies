@@ -1,6 +1,7 @@
 package ru.fixies.controllers;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,11 +29,9 @@ public class AuthController {
     public ResponseEntity<?> createAuthToken(@RequestBody AuthRequest authRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getLogin(), authRequest.getPassword()));
-
         } catch (BadCredentialsException ex) {
             System.out.println("fail authRequest.getLogin() = " + authRequest.getLogin());
             System.out.println("fail authRequest.getPassword() = " + authRequest.getPassword());
-
             return new ResponseEntity<>(new ServiceError("Incorrect username or password"), HttpStatus.UNAUTHORIZED);
         }
         UserDetails userDetails = userService.loadUserByUsername(authRequest.getLogin());
@@ -42,5 +41,4 @@ public class AuthController {
         String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new AuthResponse(token));
     }
-
 }

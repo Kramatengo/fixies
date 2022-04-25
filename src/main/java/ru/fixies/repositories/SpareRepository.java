@@ -7,5 +7,4 @@ import ru.fixies.models.Spare;
 @Repository
 public interface SpareRepository extends JpaRepository<Spare, Long> {
 
-
 }

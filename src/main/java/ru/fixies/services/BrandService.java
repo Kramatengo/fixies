@@ -1,5 +1,6 @@
 package ru.fixies.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.fixies.dtos.BrandDto;
@@ -7,16 +8,15 @@ import ru.fixies.mapper.ModelMapper;
 import ru.fixies.models.Brand;
 import ru.fixies.repositories.BrandRepository;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class BrandService {
 
-    @Resource
-    private BrandRepository repository;
+    private final BrandRepository repository;
 
     @Transactional
     public BrandDto save(BrandDto brandDto) {

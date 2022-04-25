@@ -14,6 +14,7 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 public class Status {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)

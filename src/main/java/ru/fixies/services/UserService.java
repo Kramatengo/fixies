@@ -49,14 +49,14 @@ public class UserService implements UserDetailsService {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
-    public User save(User user) {
-        return userRepository.save(user);
-    }
-
     @Transactional
     public UserDto save(ru.fixies.dtos.UserDto userDto) {
         User user = userRepository.save(ModelMapper.INSTANCE.dtoToUser(userDto));
         return ModelMapper.INSTANCE.userToDto(user);
+    }
+
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
     @Transactional(readOnly = true)
@@ -76,6 +76,4 @@ public class UserService implements UserDetailsService {
     public void delete(Long id) {
         userRepository.deleteById(id);
     }
-
-
 }

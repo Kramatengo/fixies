@@ -15,8 +15,7 @@ import java.util.Optional;
 @Repository
 public interface ModelRepository extends JpaRepository<Model, Long> {
 
-    @Query(
-            value = "SELECT models.id, models.category_id, " +
+    @Query(value = "SELECT models.id, models.category_id, " +
                     "models.brand_id, models.name " +
                     "FROM models " +
                     "ORDER BY category_id DESC ",

@@ -1,6 +1,5 @@
 package ru.fixies.controllers;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,15 +32,14 @@ public class UserRegController {
     private final RoleService roleService;
     private final UserRolesService userRolesService;
 
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping
     public UserRegRequest save(@RequestBody @Validated UserRegRequest userRegRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new DataValidationException(bindingResult.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList()));
         }
+
         User user = new User();
         user.setLogin(userRegRequest.getLogin());
         user.setFirstName(userRegRequest.getFirstName());
@@ -59,6 +57,4 @@ public class UserRegController {
 
         return new UserRegRequest(user);
     }
-
-
 }

@@ -7,5 +7,4 @@ import ru.fixies.models.Stock;
 @Repository
 public interface StockRepository extends JpaRepository<Stock, Long> {
 
-
 }

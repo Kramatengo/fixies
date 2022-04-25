@@ -19,11 +19,16 @@ public class ModelController {
     private final ModelService modelService;
 
     @GetMapping
-    public Page<ModelDto> findAllModels(@RequestParam(defaultValue = "1", name = "p") int pageIndex) {
+    public Page<ModelDto> getAllModels(@RequestParam(defaultValue = "1", name = "p") int pageIndex) {
         if (pageIndex < 1) {
             pageIndex = 1;
         }
         return modelService.findAllModels(pageIndex - 1, 20).map(ModelMapper.INSTANCE::modelToDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ModelDto>> getAllModels() {
+        return new ResponseEntity<>(modelService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
@@ -33,11 +38,6 @@ public class ModelController {
         ModelDto savedModel = modelService.findByName(save.getName());
         return new ResponseEntity<>(savedModel, HttpStatus.OK);
     }
-
-//    @GetMapping
-//    public ResponseEntity<List<ModelDto>> getAllModels() {
-//        return new ResponseEntity<>(modelService.findAll(), HttpStatus.OK);
-//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ModelDto> getModelById(@PathVariable long id) {
@@ -49,5 +49,4 @@ public class ModelController {
         modelService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }
