@@ -36,4 +36,10 @@ public interface ModelMapper {
     default void linkStocks(@MappingTarget Spare spare) {
         spare.getStocks().forEach(stock -> stock.setSpare(spare));
     }
+
+    Status statusDtoToStatus(StatusDto statusDto);
+    StatusDto statusToStatusDto(Status status);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateStatusFromStatusDto(StatusDto statusDto, @MappingTarget Status status);
 }

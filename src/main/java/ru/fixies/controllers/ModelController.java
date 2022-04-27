@@ -26,11 +26,6 @@ public class ModelController {
         return modelService.findAllModels(pageIndex - 1, 20).map(ModelMapper.INSTANCE::modelToDto);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ModelDto>> getAllModels() {
-        return new ResponseEntity<>(modelService.findAll(), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<ModelDto> saveModel(@RequestBody ModelDto modelDto) {
         ModelDto save = modelService.save(modelDto);

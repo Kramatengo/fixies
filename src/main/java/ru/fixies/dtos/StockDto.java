@@ -2,7 +2,6 @@ package ru.fixies.dtos;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.fixies.models.Spare;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +10,7 @@ import java.time.LocalDateTime;
 public class StockDto {
 
     private Long id;
-    private Spare spare;
+    private SpareDto spare;
     private int quantity;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
