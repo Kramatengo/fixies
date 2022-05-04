@@ -1,0 +1,112 @@
+<div id="fxNgAppSection">
+
+    <h3>Создать заявку на ремонт</h3>
+
+    <div class="orderFormContainer">
+        <form novalidate ng-submit="createOrder()">
+            <label for="clientName">Введите имя клиента</label><br>
+            <input id="clientName" class="form-control" type="text"
+                   placeholder="Имя клиента"
+                   ng-model="newOrder.applicantName">
+
+            <p></p>
+
+            <label for="clientPhone">Введите телефон клиента</label><br>
+            <input id="clientPhone" class="form-control" type="text"
+                   placeholder="Телефон клиента"
+                   ng-model="newOrder.applicantPhone">
+
+            <p></p>
+
+            <label for="clientEmail">Введите email клиента</label><br>
+            <input id="clientEmail" class="form-control" type="text"
+                   placeholder="e-mail клиента"
+                   ng-model="newOrder.applicantEmail">
+
+            <p></p>
+
+<!--            <label for="productBrand">-->
+<!--                Брэнд продукта (появится после выбора модели продукта)</label><br>-->
+<!--            <div id="productBrand" class="form-control">-->
+<!--                Брэнд: {{newOrder.model.brand}}-->
+<!--            </div>-->
+
+<!--            <p></p>-->
+
+<!--            <label for="productCategory">-->
+<!--                Категория продукта (появится после выбора модели продукта)</label><br>-->
+<!--            <div id="productCategory" class="form-control">-->
+<!--                Категория: {{newOrder.model.category}}</div>-->
+
+<!--            <p></p>-->
+
+            <label for="productModel">Выберите модель продукта</label><br>
+            <select  id="productModel"
+                    ng-options="x.name for x in orderPageModelsData"
+                    class="form-select"
+                     ng-model="newOrder.model">
+            </select>
+
+            <p></p>
+
+            <label for="productSerialNumber">Ведите серийный номер продукта</label><br>
+            <input id="productSerialNumber" class="form-control" type="text"
+                   placeholder="Серийный номер"
+                   ng-model="newOrder.serialNumber">
+
+            <p></p>
+
+            <label for="clientSubject">Кратко опишите что не работает</label><br>
+            <input id="clientSubject" class="form-control" type="text"
+                   placeholder="Что не работает"
+                   ng-model="newOrder.subject">
+
+            <p></p>
+
+            <label for="clientDescription">Кратко опишите как была обнаружена неисправность</label><br>
+            <input  id="clientDescription" class="form-control" type="text"
+                    placeholder="Описание неисправности"
+                    ng-model="newOrder.description">
+
+            <p></p>
+
+            <label for="serviceEngineerDesignated">Назначьте мастера по ремонту</label><br>
+            <select id="serviceEngineerDesignated"
+                    ng-options="x.login for x in orderPageServiceEngineerData"
+                    class="form-select"
+                    ng-model="newOrder.executor">
+            </select>
+
+            <p></p>
+
+            <label for="clientDeadline">Назначьте дату завершения ремонта в формате ГГГГ-ММ-ДД (Пример: 2022-04-30)</label><br>
+            <input id="clientDeadline" class="form-control" type="text"
+                   placeholder="Дата завершения ремонта (в формате ГГГГ-ММ-ДД [Пример: 2022-04-30])"
+                   ng-model="newOrder.deadline">
+
+            <p></p>
+
+            <label for="repairStatus">Выберите статус ремонта</label><br>
+            <select  id="repairStatus"
+                    ng-options="x.name for x in orderPageStatusData"
+                    class="form-select"
+                    ng-model="newOrder.status">
+            </select>
+
+            <p></p>
+
+            <label for="repairTotalPrice">Введите полную сумму ремонта</label><br>
+            <input id="repairTotalPrice" class="form-control" type="text"
+                   placeholder="Полная сумма ремонта"
+                   ng-model="newOrder.totalPrice">
+
+            <p></p>
+
+            <button type="submit" class="btn btn-primary">Создать заказ</button>
+        </form>
+
+
+    </div>  <!-- class="orderFormContainer"  -->
+
+
+</div>  <!-- id="fxNgAppSection"  -->
