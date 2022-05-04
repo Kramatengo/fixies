@@ -1,0 +1,22 @@
+<div id="fxNgAppSection">
+    <br>
+    <h3>Введите данные пользователя</h3>
+    <form novalidate ng-submit="createUser()">
+        <input class="form-control" type="text" placeholder="Логин" ng-model="new_user.login">
+        <br>
+        <input class="form-control" type="text" placeholder="Пароль" ng-model="new_user.password">
+        <br>
+        <input class="form-control" type="text" placeholder="Имя" ng-model="new_user.firstName">
+        <br>
+        <input class="form-control" type="text" placeholder="Фамилия" ng-model="new_user.lastName">
+        <br>
+        <input class="form-control" type="text" placeholder="Отчество" ng-model="new_user.middleNames">
+        <br>
+        <input class="form-control" type="text" placeholder="e-mail" ng-model="new_user.email">
+        <br>
+        <input class="form-control" type="text" placeholder="Телефон" ng-model="new_user.phone">
+        <br>
+        <button type="submit" class="btn btn-primary">Создать</button>
+    </form>
+</div>  <!-- id="fxNgAppSection"  -->
+

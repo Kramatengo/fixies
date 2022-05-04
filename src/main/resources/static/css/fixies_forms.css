@@ -1,0 +1,442 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto:700);
+
+
+/* Global Styles */
+/* CSS Document */
+body {
+    margin: 0px;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding: 0px;
+    background-color: #FFFFFF;
+}
+
+
+/* Разметка страницы - начало */
+
+#fxContainer {
+    width: auto;
+    height: auto;
+    /*height: 500px;*/
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+
+    border: 3px solid red;
+
+    position: relative;
+
+
+}
+
+
+#fxMidContainer {
+    margin: auto;
+    height: auto;
+    /*height: 500px;*/
+
+    width: 100%;
+    max-width: 1200px;
+    background-color: white;
+    border: 3px solid magenta;
+    content: "";
+    display: table;
+
+    /*
+	display: inline-block;
+	*/
+
+    position: relative;
+    clear: both;
+
+}
+
+#fxNgAppSection {
+    height: auto;
+    /*height: 500px;*/
+
+    /*
+	width: 579px;
+*/
+    width: 100%;
+    max-width: 1200px;
+    /*
+	min-height: 900px;
+	*/
+    margin: auto;
+    padding: 50px;
+
+    border: 3px solid green;
+
+    background-color: white;
+    position: relative;
+    float: left;
+    clear: both;
+}
+
+#fxTopLogo {
+    height: 200px;
+    /*
+	width: 922px;
+*/
+    width: 100%;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+    /*
+	border: 1px solid #cccccc;
+	*/
+
+    background-image: url(../images/Logo_top_1200x200_3.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    clear: both;
+}
+
+#fxBottomLogo {
+    height: 50px;
+    /*
+	width: 922px;
+*/
+    width: 100%;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+    /*
+	border: 1px solid #cccccc;
+	*/
+    text-align: left;
+    background-image: url(../images/Logo_bottom_1200x50.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    clear: both;
+
+
+}
+
+#copyrightContainer {
+    height: 25px;
+    /*
+	width: 922px;
+*/
+    width: 200px;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    margin-top: 10px;
+    /*
+	border: 1px solid #cccccc;
+	*/
+    text-align: center;
+    float: left;
+}
+
+#fxMenuBar {
+    height: auto;
+    /*height: 500px;*/
+
+    width: 100%;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+
+    border: 1px solid cyan;
+
+    background-color: lightgrey;
+    float: left;
+    display: inline-block;
+    position: relative;
+    clear: both;
+}
+
+/*######################################*/
+/*Работающий вариант 1 - начало   - */
+/*######################################*/
+
+.fxTopHorizontalMenu {
+    /*overflow: hidden;*/
+    background-color: lightgrey;
+}
+
+.fxTopHorizontalMenu a {
+    float: left;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropbtn {
+    background-color: lightgrey;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    /*display: none;*/
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: lightgray;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 8px;
+
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: lightgrey;
+}
+
+/*######################################*/
+/*Работающий вариант 1 - конец   - */
+/*######################################*/
+
+#fxCredentialsBar {
+    height: auto;
+    /*height: 500px;*/
+
+    width: 100%;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+
+    border: 1px solid cyan;
+
+    background-color: white;
+    float: left;
+    display: inline-block;
+    position: relative;
+    clear: both;
+
+}
+
+#fxLoginBar {
+
+    height: auto;
+    /*height: 500px;*/
+
+    width: 100%;
+    max-width: 500px;
+    margin-right: auto;
+    margin-left: auto;
+
+    border: 1px solid yellow;
+
+    background-color: white;
+    float: right;
+    display: inline-block;
+    position: relative;
+    /*clear: both;*/
+}
+
+#fxLoginEntryBar {
+    height: 40px;
+    width: 100%;
+    max-width: 180px;
+    margin-right: auto;
+    margin-left: 10px;
+
+    border: 1px solid yellow;
+
+    background-color: white;
+    float: right;
+    display: inline-block;
+    position: relative;
+
+}
+
+#fxPasswordEntryBar {
+    height: 40px;
+    width: 100%;
+    max-width: 180px;
+    margin-right: auto;
+    margin-left: 10px;
+
+    border: 1px solid yellow;
+
+    background-color: white;
+    float: right;
+    display: inline-block;
+    position: relative;
+
+}
+
+#fxEntryButton {
+    height: 40px;
+    width: 100%;
+    max-width: 60px;
+    margin-right: auto;
+    margin-left: 10px;
+
+    border: 1px solid yellow;
+
+    background-color: white;
+    float: right;
+    display: inline-block;
+    position: relative;
+
+}
+
+
+#fxExitButtonContainer {
+    height: 40px;
+    width: 100%;
+    max-width: 60px;
+    margin-right: auto;
+    margin-left: auto;
+
+    border: 1px solid yellow;
+
+    background-color: white;
+    float: right;
+    display: inline-block;
+    position: relative;
+}
+
+.fxExitButton {
+    height: 40px;
+    width: 100%;
+    max-width: 60px;
+    margin-right: auto;
+    margin-left: auto;
+
+    border: 1px solid red;
+
+    background-color: white;
+    float: right;
+    display: inline-block;
+    position: relative;
+}
+
+#fxRegisterButton {
+    height: auto;
+    /*height: 500px;*/
+
+    width: 100%;
+    max-width: 150px;
+    margin-right: auto;
+    margin-left: auto;
+
+    border: 1px solid blue;
+
+    background-color: white;
+    float: right;
+    display: inline-block;
+    position: relative;
+}
+
+
+/*#########################################*/
+/*Front_page - начало*/
+/*#########################################*/
+
+.categoryTile {
+
+    height: 250px;
+    width: 150px;
+    margin-right: 50px;
+
+
+    /*border: 1px solid blue;*/
+
+    background-color: white;
+    float: right;
+    display: inline-block;
+    position: relative;
+    box-shadow: 5px 5px 5px 5px gray;
+    border-radius: 5px;
+
+
+}
+
+
+.categoryImageContainer {
+
+    height: 150px;
+    width: 150px;
+    margin: auto;
+
+    /*border: 1px solid blue;*/
+
+    background-color: white;
+    float: right;
+    display: inline-block;
+    position: relative;
+
+}
+
+.categoryCaptionContainer {
+
+    height: 100px;
+    width: 150px;
+    margin: auto;
+    padding: 10px;
+
+    /*border: 1px solid blue;*/
+
+    background-color: white;
+    float: none;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+
+}
+
+/*#########################################*/
+/*Front_page - конец*/
+/*#########################################*/
+
+
+/*#########################################*/
+/*Order_page - начало*/
+/*#########################################*/
+
+.orderFormContainer {
+
+    height: auto;
+    width: 900px;
+    margin: auto;
+    padding: 10px;
+    background-color: white;
+
+    border: 1px solid blue;
+
+    float: none;
+    display: inline-block;
+    position: relative;
+
+}
+
+
+/*#########################################*/
+/*Order_page - конец*/
+/*#########################################*/
