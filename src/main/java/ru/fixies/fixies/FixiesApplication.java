@@ -1,4 +1,4 @@
-package ru.fixies;
+package ru.fixies.fixies;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

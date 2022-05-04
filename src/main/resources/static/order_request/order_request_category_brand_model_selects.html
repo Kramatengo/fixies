@@ -1,0 +1,71 @@
+<div id="fxNgAppSection">
+
+    <h3>Создать заявку на ремонт</h3>
+
+    <div class="orderFormContainer">
+        <form novalidate ng-submit="createOrder()">
+            <input class="form-control" type="text" placeholder="Имя клиента" ng-model="new_order.client_name" >
+            <p></p>
+            <input class="form-control" type="text" placeholder="Телефон клиента" ng-model="new_order.client_phone" >
+            <p></p>
+            <input class="form-control" type="text" placeholder="e-mail клиента" ng-model="new_order.client_email" >
+            <p></p>
+
+
+            <label for="productCategory">Выберите категорию техники</label><br>
+            <select ng-model="selectedCategory" id="productCategory"
+                ng-options="x.name for x in orderPageCategoriesData" ng-change="getBrandsForOrderPage()">
+            <!--                    ng-options="x.name for x in orderPageCategoriesData" ng-change="getBrandsBySelectedCategory({{selectedCategory}})">-->
+
+
+            </select>
+            {{selectedModel.category}}
+
+<!--            <input class="form-control" type="text" placeholder="Категория" ng-model="new_order.category" >-->
+            <p></p>
+            <label for="productBrand">Выберите брэнд техники</label><br>
+            <select ng-model="selectedBrand" id="productBrand"
+                    ng-options="x.name for x in orderPageBrandsData"  ng-change="getModelsForOrderPage()">
+<!--                    ng-options="x.name for x in orderPageBrandsData"  ng-change="getModelsForOrderPage()">-->
+<!--                ng-options="x.name for x in orderPageBrandsData"  ng-change="getModelsBySelectedBrand({{selectedBrand}}, {{selectedCategory}})">-->
+
+            </select>
+            {{selectedModel.brand}}
+
+<!--            <input class="form-control" type="text" placeholder="Брэнд" ng-model="new_order.brand">-->
+            <p></p>
+            <label for="productModel">Выберите модель техники</label><br>
+<!--            <select ng-model="selectedModel" id="productModel" ng-options="x.name group by x.name disable when x.notAnOption for x in selectedBrand">-->
+<!--            </select>-->
+            <select ng-model="selectedModel" id="productModel"
+                    ng-options="x.name for x in orderPageModelsData">
+            </select>
+            {{selectedModel}}
+            <p></p>
+
+            <div class="form-control">Брэнд : {{selectedModel.brand}}</div>
+            <div class="form-control">Категория : {{selectedModel.category}}</div>
+
+            <!--            <input class="form-control" type="text" placeholder="Модель" ng-model="new_order.model">-->
+            <p></p>
+            <input class="form-control" type="text" placeholder="Что не работает" ng-model="new_order.subject">
+            <p></p>
+            <input class="form-control" type="text" placeholder="Описание неисправности" ng-model="new_order.description">
+            <p></p>
+            <input class="form-control" type="text" placeholder="Мастер" ng-model="new_order.executorId">
+            <p></p>
+            <input class="form-control" type="text" placeholder="Предпочтительная дата" ng-model="new_order.deadline">
+            <p></p>
+            <input class="form-control" type="text" placeholder="Статус" ng-model="new_order.status">
+            <p></p>
+
+
+            <button type="submit" class="btn btn-primary">Создать заказ</button>
+        </form>
+
+
+    </div>  <!-- class="orderFormContainer"  -->
+
+
+
+</div>  <!-- id="fxNgAppSection"  -->
