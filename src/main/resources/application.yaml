@@ -1,11 +1,11 @@
 server:
   port: 8159
   servlet:
-    context-path: /Asc
+    context-path: /asc
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:fixies;MODE=PostgreSQL
+    url: jdbc:h2:mem:mydatabase;MODE=PostgreSQL
     username: sa
     password:
   jpa:
@@ -13,17 +13,18 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+
   h2:
     console:
       enabled: true
       settings:
         web-allow-others: false
-#  flyway:
-#    url: jdbc:h2:mem:fixies
-#    user: sa
-#    password:
-#    locations: filesystem:db/migration
-#    baseline-on-migrate: true
+      path: /h2-console
+
+# Call h2 console
+# http://localhost:8159/asc/h2-console/
+
 
 #  datasource:
 #    driver-class-name: org.postgresql.Driver
@@ -36,3 +37,10 @@ spring:
 #      hibernate:
 #        dialect: org.hibernate.dialect.PostgreSQL94Dialect
 #    open-in-view: false
+
+
+jwt:
+  secret: oifh4309f8h324098fh4398gh8h*&TG*#&Gg97rgff98gf983h4f983h487g*&^F&Fu3r
+  lifetime: 36000000
+
+
