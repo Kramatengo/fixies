@@ -1,7 +1,6 @@
 package ru.fixies.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.fixies.dtos.UserRegRequest;
+import ru.fixies.dtos.UserDto;
 import ru.fixies.exceptions.DataValidationException;
 import ru.fixies.models.Role;
 import ru.fixies.models.User;
@@ -35,7 +34,7 @@ public class UserRegController {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping
-    public UserRegRequest save(@RequestBody @Validated UserRegRequest userRegRequest, BindingResult bindingResult) {
+    public String save(@RequestBody @Validated UserDto userRegRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new DataValidationException(bindingResult.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList()));
         }
@@ -55,6 +54,6 @@ public class UserRegController {
         userRole.setRoleId(roleService.findByRoleName(INITIAL_USER_ROLE).stream().map(Role::getId).toList().get(0));
         userRolesService.save(userRole);
 
-        return new UserRegRequest(user);
+        return "SUCCESS";
     }
 }

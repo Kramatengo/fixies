@@ -8,6 +8,7 @@ angular.module('fx-front').controller('frontPageController', function ($scope, $
             method: 'GET'
         }).then(function (response) {
             $scope.allCategoriesPage = response.data;
+            console.log($scope.allCategoriesPage);
         }, function failureCallback(response) {
             console.log(response);
         });

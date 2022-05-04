@@ -23,6 +23,24 @@ public class Category {
     @Length(max = 255, message = "The length of the category name cannot exceed 255 characters!")
     private String name;
 
+    @Column(name="image")
+    private String image;
+
+    @Column(name="description")
+    private String description;
+
+    @Column(name="url_path")
+    private String urlPath;
+
+    @Column(name="alt_text")
+    private String altText;
+
+    @Column(name="img_width")
+    private String imgWidth;
+
+    @Column(name="img_height")
+    private String imgHeight;
+
     @OneToMany(mappedBy = "category")
     @ToString.Exclude
     private List<Model> models;

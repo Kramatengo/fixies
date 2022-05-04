@@ -9,7 +9,9 @@ import ru.fixies.dtos.ModelDto;
 import ru.fixies.mapper.ModelMapper;
 import ru.fixies.services.ModelService;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/models")
@@ -43,5 +45,16 @@ public class ModelController {
     public ResponseEntity<HttpStatus> deleteById(@PathVariable long id) {
         modelService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("{selectedBrandId}/{selectedCategoryId}")
+    public List<ru.fixies.dtos.ModelDto>  findModelsBySelectedBrand(@PathVariable ("selectedBrand") long selectedBrandId, @PathVariable ("selectedCategory") Long selectedCategoryId) {
+        return Collections.emptyList();
+    }
+
+    @GetMapping("/by_category/{selectedCategoryId}")
+    public List<ru.fixies.dtos.ModelDto> findBrandsBySelectedCategory(@PathVariable long selectedCategoryId) {
+        return Collections.emptyList();
+
     }
 }

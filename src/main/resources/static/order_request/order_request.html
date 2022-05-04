@@ -42,7 +42,7 @@
             
             <label for="productModel">Выберите модель продукта</label><br>
             <select  id="productModel"
-                    ng-options="x.name for x in orderPageModelsData"
+                    ng-options="x.name for x in orderPageModelsData.content"
                     class="form-select"
                      ng-model="newOrder.model">
             </select>

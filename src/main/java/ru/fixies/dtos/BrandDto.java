@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BrandDto {
 
+    private Long id;
     private String name;
 
 }

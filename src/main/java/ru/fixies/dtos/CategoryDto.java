@@ -9,6 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CategoryDto {
 
+    private Long id;
     private String name;
+    private String image;
+    private String description;
+    private String urlPath;
+    private String altText;
+    private String imgWidth;
+    private String imgHeight;
 
 }

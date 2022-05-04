@@ -11,6 +11,7 @@ angular.module('fx-front').controller('orderRequestController', function ($scope
             method: 'GET',
         }).then(function (response) {
             $scope.orderPageModelsData = response.data;
+            console.log($scope.orderPageModelsData);
         });
     }
 

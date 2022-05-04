@@ -15,6 +15,7 @@ import ru.fixies.models.User;
 import ru.fixies.repositories.UserRepository;
 import ru.fixies.repositories.UserRolesRepository;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +52,16 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public UserDto save(ru.fixies.dtos.UserDto userDto) {
-        User user = userRepository.save(ModelMapper.INSTANCE.dtoToUser(userDto));
+        //TODO: пересмотреть
+        User user = ModelMapper.INSTANCE.dtoToUser(userDto);
+        User oldUser = userRepository.findByLogin(userDto.getLogin()).orElse(null);
+        LocalDateTime currentTime = LocalDateTime.now();
+        if (oldUser == null) {
+            user.setCreatedAt(currentTime);
+        }
+        user.setUpdatedAt(currentTime);
+        userRepository.save(user);
+        user.setPassword("");
         return ModelMapper.INSTANCE.userToDto(user);
     }
 

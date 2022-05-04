@@ -1,7 +1,0 @@
-package ru.fixies.fixies.exceptions;
-
-public class ResourceNotFoundException extends RuntimeException {
-    public ResourceNotFoundException(String message) {
-        super(message);
-    }
-}
