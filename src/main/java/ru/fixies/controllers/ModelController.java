@@ -32,7 +32,7 @@ public class ModelController {
     public ResponseEntity<ModelDto> saveModel(@RequestBody ModelDto modelDto) {
         ModelDto save = modelService.save(modelDto);
 
-        ModelDto savedModel = modelService.findByName(save.getName());
+        ModelDto savedModel = ModelMapper.INSTANCE.modelToDto(modelService.findByName(save.getName()));
         return new ResponseEntity<>(savedModel, HttpStatus.OK);
     }
 
@@ -48,7 +48,7 @@ public class ModelController {
     }
 
     @GetMapping("{selectedBrandId}/{selectedCategoryId}")
-    public List<ru.fixies.dtos.ModelDto>  findModelsBySelectedBrand(@PathVariable ("selectedBrand") long selectedBrandId, @PathVariable ("selectedCategory") Long selectedCategoryId) {
+    public List<ru.fixies.dtos.ModelDto>  findModelsBySelectedBrand(@PathVariable ("selectedBrandId") long selectedBrandId, @PathVariable ("selectedCategoryId") Long selectedCategoryId) {
         return Collections.emptyList();
     }
 

@@ -18,22 +18,24 @@ public class OrderService {
 
     public final OrderRepository orderRepository;
     private final UserService userService;
+    private final ModelService modelService;
+    private final StatusService statusService;
 
     @Transactional
     public void createOrder(Principal principal, OrderDto orderDto) {
 
         User user = userService.findByLogin(principal.getName()).orElseThrow(() -> new ResourceNotFoundException("Не удалось найти пользователя при оформлении заказа. Имя пользователя: " + principal.getName()));
         Order order = new Order();
-        order.setCustomer(user);   //OK
-        order.setExecutor(ModelMapper.INSTANCE.dtoToUser(orderDto.getExecutor()));  // OK
-        order.setModel(ModelMapper.INSTANCE.dtoToModel(orderDto.getModel()));  // NOK
+        order.setCustomer(user);
+        order.setExecutor(userService.findByLogin(orderDto.getExecutor().getLogin()).orElseThrow(() -> new ResourceNotFoundException("Не удалось найти пользователя при оформлении заказа. Имя пользователя: " + orderDto.getExecutor().getLogin())));
+        order.setModel(modelService.findByName(orderDto.getModel().getName()));
 
-        order.setSubject(orderDto.getSubject());   //OK
-        order.setDescription(orderDto.getDescription());   //OK
-        order.setDeadline(orderDto.getDeadline());  //OK
-        order.setStatus(ModelMapper.INSTANCE.statusDtoToStatus(orderDto.getStatus()));    // OK
-        order.setSerialNumber(orderDto.getSerialNumber());  // OK
-        order.setTotalPrice(orderDto.getTotalPrice());  // OK
+        order.setSubject(orderDto.getSubject());
+        order.setDescription(orderDto.getDescription());
+        order.setDeadline(orderDto.getDeadline());
+        order.setStatus(statusService.findByName(orderDto.getStatus().getName()));
+        order.setSerialNumber(orderDto.getSerialNumber());
+        order.setTotalPrice(orderDto.getTotalPrice());
 
         orderRepository.save(order);
     }

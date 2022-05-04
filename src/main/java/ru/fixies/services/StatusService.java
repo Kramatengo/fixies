@@ -18,4 +18,7 @@ public class StatusService {
     }
 
 
+    public Status findByName(String name) {
+        return statusRepository.findByName(name);
+    }
 }

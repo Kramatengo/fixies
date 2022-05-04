@@ -58,9 +58,8 @@ public class ModelService {
     }
 
     @Transactional(readOnly = true)
-    public ModelDto findByName(String name) {
-        Optional<Model> model = modelRepository.findByName(name);
-        return model.map(ModelMapper.INSTANCE::modelToDto).orElse(null);
+    public Model findByName(String name) {
+        return modelRepository.findByName(name).orElse(null);
     }
 
     @Transactional(readOnly = true)
