@@ -21,22 +21,12 @@
                 controller: 'orderStatusController'
             })
 
-            .when('/order_raise', {
-                templateUrl: 'order_raise/order_raise.html',
-                controller: 'orderRaiseController'
-            })
-
-            .when('/order_edit/:orderId',{
+            .when('/order_edit/:orderId', {
                 templateUrl: 'order_edit/order_edit.html',
                 controller: 'orderEditController'
             })
 
-            .when('/order_se_edit/:orderId',{
-                templateUrl: 'order_se_edit/order_se_edit.html',
-                controller: 'orderSeEditController'
-            })
-
-            .when('/panel',{
+            .when('/panel', {
                 templateUrl: 'panel/panel.html',
                 controller: 'panelController'
             })

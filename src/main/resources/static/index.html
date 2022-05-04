@@ -28,7 +28,7 @@
     <div id="fxMidContainer" ng-controller="indexController">
 
         <div id="fxTopLogo">
-        </div>  <!-- id="fxTopLogo" -->
+        </div>
 
         <div id="fxCredentialsBar">
 
@@ -52,30 +52,25 @@
                         </div>
                     </form>
 
-                </div>  <!-- class="nav-item"   -->
+                </div>
 
                 <div id="fxExitButtonContainer" ng-show="isUserLoggedIn()">
                     <button class="fxExitButton" ng-click="tryToLogout()"><span class="credentialsBarFont">Выйти</span>
                     </button>
-                </div>  <!-- id="fxExitButtonContainer"  -->
-            </div>  <!-- id="fxLoginBar"   -->
-                <div id="fxRegisterButton" ng-hide="isUserLoggedIn()">
-                    <a class="nav-link" href="#!/create_user"><span class="credentialsBarFont">Регистрация</span></a>
+                </div>
+            </div>
+            <div id="fxRegisterButton" ng-hide="isUserLoggedIn()">
+                <a class="nav-link" href="#!/create_user"><span class="credentialsBarFont">Регистрация</span></a>
 
-                </div>   <!-- id="fxRegisterButton"   -->
+            </div>
 
 
-
-        </div>  <!-- id="fxCredentialsBar" -->
+        </div>
 
         <div id="fxMenuBar">
 
 
             <div class="fxTopHorizontalMenu">
-
-                <!--######################################-->
-                <!--Работающий вариант 1 - начало - -->
-                <!--######################################-->
 
                 <a href="#!/" class="dropbtn"> Главная</a>
                 <a href="#!/order_request" class="dropbtn">Оформление заказа</a>
@@ -103,80 +98,24 @@
                     </div>
                 </div>
 
-                <!--######################################-->
-                <!--Работающий вариант 1 - конец - -->
-                <!--######################################-->
+            </div>
 
+        </div>
 
-            </div>  <!-- class="fxTopHorizontalMenu"   -->
+        <div id="fxBottomLogo">
+            <div id="copyrightContainer">
+                <span class="bottomLogoText"> 2022 &copy; Фиксики  </span>
+            </div>
+        </div>
+    </div>
 
-
-        </div>  <!-- id="fxMenuBar"  -->
-
-
-        <!--        <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-        <!--            <div class="collapse navbar-collapse" id="navbarNav">-->
-        <!--                <ul class="navbar-nav">-->
-        <!--                    <li class="nav-item">-->
-        <!--                        <a class="nav-link" href="#!/" style="font-weight: bold;">Spring Web Store</a>-->
-        <!--                    </li>-->
-        <!--                    <li class="nav-item">-->
-        <!--                        <a class="nav-link" href="#!/store">Каталог товаров</a>-->
-        <!--                    </li>-->
-        <!--                    <li class="nav-item" ng-show="isUserLoggedIn()">-->
-        <!--                        <a class="nav-link" href="#!/create_product">(Служебная функция) Создать товар</a>-->
-        <!--                    </li>-->
-        <!--                    <li class="nav-item" ng-show="!isUserLoggedIn()">-->
-        <!--                        <form class="align-middle" ng-submit="tryToAuth()">-->
-        <!--                            <div class="input-group input-group-sm" style="padding: 4px;">-->
-        <!--                                &lt;!&ndash;                                <input id="navLoginField" class="form-control" ng-model="user.username" type="text"&ndash;&gt;-->
-        <!--                                &lt;!&ndash;                                       aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">&ndash;&gt;-->
-
-
-        <!--                                <input id="navLoginField" class="form-control" ng-model="user.login" type="text"-->
-        <!--                                       aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">-->
-
-        <!--                                <input id="navPasswordField" class="form-control" ng-model="user.password"-->
-        <!--                                       type="password"-->
-        <!--                                       aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">-->
-
-        <!--                                <button id="navLoginSubmit" class="btn btn-outline-warning btn-sm"-->
-        <!--                                        style="margin-left: 10px;" type="submit">Войти-->
-        <!--                                </button>-->
-
-        <!--                            </div>-->
-        <!--                        </form>-->
-        <!--                    </li>-->
-        <!--                    <li class="nav-item" ng-show="isUserLoggedIn()" style="padding: 4px;">-->
-        <!--                        <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">Выйти</button>-->
-        <!--                    </li>-->
-        <!--                    <li class="nav-item" ng-hide="isUserLoggedIn()">-->
-        <!--                        <a class="nav-link" href="#!/create_user">Регистрация</a>-->
-        <!--                    </li>-->
-
-        <!--                </ul>-->
-        <!--            </div>-->
-        <!--        </nav>-->
-
-
-        <ng-view>
-
-            <!--  use <div id="fxNgAppSection">  for routing html page    -->
-
-        </ng-view>
-
-
-    </div> <!-- id="fxMidContainer" -->
-
-</div>  <!-- id="fxContainer" -->
+</div>
 
 <script src="index.js"></script>
 <script src="front_page/front_page.js"></script>
 <script src="order_request/order_request.js"></script>
 <script src="order_status/order_status.js"></script>
-<script src="order_raise/order_raise.js"></script>
 <script src="order_edit/order_edit.js"></script>
-<script src="order_se_edit/order_se_edit.js"></script>
 <script src="panel/panel.js"></script>
 <script src="create_user/create_user.js"></script>
 
