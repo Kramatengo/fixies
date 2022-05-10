@@ -32,4 +32,10 @@ public interface ModelRepository extends JpaRepository<Model, Long> {
 
     Optional<List<Model>> findByBrandAndCategory(Brand brand, Category category);
 
+    Optional<List<Model>> findByBrandIdAndCategoryId(Long brandId, Long categoryId);
+
+    Optional<List<Model>> findByBrandId(Long brandId);
+
+    Optional<List<Model>> findByCategoryId(Long categoryId);
+
 }

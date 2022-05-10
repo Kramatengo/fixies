@@ -88,6 +88,25 @@ public class ModelService {
     }
 
     @Transactional(readOnly = true)
+    public List<ModelDto> findByBrandIdAndCategoryId(Long brandId, Long categoryId) {
+        List<Model> models = modelRepository.findByBrandIdAndCategoryId(brandId, categoryId).orElse(new ArrayList<>());
+
+        return models.stream().map(ModelMapper.INSTANCE::modelToDto).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ModelDto> findByCategoryId(Long categoryId) {
+        List<Model> models = modelRepository.findByCategoryId(categoryId).orElse(new ArrayList<>());
+        return models.stream().map(ModelMapper.INSTANCE::modelToDto).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ModelDto> findByBrandId(Long brandId) {
+        List<Model> models = modelRepository.findByBrandId(brandId).orElse(new ArrayList<>());
+        return models.stream().map(ModelMapper.INSTANCE::modelToDto).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public List<ModelDto> findAll() {
         List<Model> all = modelRepository.findAll();
         return all.stream().map(ModelMapper.INSTANCE::modelToDto).collect(Collectors.toList());
