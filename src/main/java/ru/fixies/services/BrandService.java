@@ -46,4 +46,10 @@ public class BrandService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    @Transactional(readOnly = true)
+    public BrandDto findByModelId(Long modelId) {
+        Optional<Brand> brand = repository.findByModelId(modelId);
+        return brand.map(ModelMapper.INSTANCE::brandToDto).orElse(null);
+    }
 }

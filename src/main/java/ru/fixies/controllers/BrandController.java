@@ -39,4 +39,9 @@ public class BrandController {
         brandService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/model/{id}")
+    public ResponseEntity<BrandDto> getBrandByModelId(@PathVariable long id) {
+        return new ResponseEntity<>(brandService.findByModelId(id), HttpStatus.OK);
+    }
 }
