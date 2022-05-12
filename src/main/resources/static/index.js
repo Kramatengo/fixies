@@ -16,6 +16,11 @@
                 controller: 'orderRequestController'
             })
 
+            .when('/order_list', {
+                templateUrl: 'order_list/order_list.html',
+                controller: 'orderListController'
+            })
+
             .when('/order_status/:orderId', {
                 templateUrl: 'order_status/order_status.html',
                 controller: 'orderStatusController'
@@ -114,6 +119,14 @@ angular.module('fx-front').controller('indexController', function ($rootScope, $
 
     $rootScope.isUserSuperUser = function () {
         if (userLogin != 'superuser') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    $rootScope.isNotUser = function () {
+        if (userLogin != 'user') {
             return true;
         } else {
             return false;

@@ -24,18 +24,18 @@
                    ng-model="newOrder.applicantEmail">
 
             <br>
-            <div ng-hide="newOrder.model">
+            <div ng-show="newOrder.model">
                 <label for="productBrand">
                     Брэнд продукта (появится после выбора модели продукта)</label><br>
                 <div id="productBrand" class="form-control">
-                    Брэнд: {{newOrder.model.brand}}
+                    Брэнд: {{newOrder.model.brand.name}}
                 </div>
                 <br>
 
                 <label for="productCategory">
                     Категория продукта (появится после выбора модели продукта)</label><br>
                 <div id="productCategory" class="form-control">
-                    Категория: {{newOrder.model.category}}</div>
+                    Категория: {{newOrder.model.category.name}}</div>
     
                 <br>
             </div>

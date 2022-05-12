@@ -42,6 +42,7 @@ angular.module('fx-front').controller('orderRequestController', function ($scope
             data: $scope.newOrder
         }).then(function (response) {
             alert('Ваш заказ успешно сформирован');
+            console.log($scope.newOrder);
             $scope.newOrder = null;
             $location.path('/');
         }, function failureCallback (response) {

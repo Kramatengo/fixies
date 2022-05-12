@@ -117,28 +117,28 @@ CREATE TABLE IF NOT EXISTS statuses
 DROP TABLE IF EXISTS orders;
 CREATE TABLE IF NOT EXISTS orders
 (
-    id            serial PRIMARY KEY,
-    created_at    timestamp default current_timestamp,
-    customer_id   bigint       ,
-    applicant_name   varchar(100) ,
-    applicant_phone  varchar(100) ,
-    applicant_email  varchar(100) ,
-    executor_id   bigint       ,
-    model_id      bigint       ,
-    brand_id      bigint       ,
-    category_id   bigint       ,
-    subject       varchar(255) ,
-    description   text         ,
-    deadline      timestamp,
-    status_id     int          ,
-    serial_number varchar(100),
-    total_price   decimal(8, 2),
+    id              serial PRIMARY KEY,
+    created_at      timestamp default current_timestamp,
+    customer_id     bigint,
+    applicant_name  varchar(100),
+    applicant_phone varchar(100),
+    applicant_email varchar(100),
+    executor_id     bigint,
+    model_id        bigint,
+--    brand_id        bigint,
+--    category_id     bigint,
+    subject         varchar(255),
+    description     text,
+    deadline        timestamp,
+    status_id       int,
+    serial_number   varchar(100),
+    total_price     decimal(8, 2),
     foreign key (customer_id) references users (id),
     foreign key (executor_id) references users (id),
     foreign key (model_id) references models (id),
-    foreign key (status_id) references statuses (id),
-    foreign key (category_id) references categories (id),
-    foreign key (brand_id) references brands (id)
+    foreign key (status_id) references statuses (id)
+--    foreign key (category_id) references categories (id),
+--    foreign key (brand_id) references brands (id)
 
 );
 
@@ -147,9 +147,9 @@ CREATE TABLE IF NOT EXISTS orders
 insert into users(login, password, email)
 VALUES ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@domain.su'),           -- 100
        ('master', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'master@domain.su'),       -- 100
-       ('admin', '$2y$04$to.PaR/wcSn/b0ieuGw3ZOq2sy9BPFhjS5c3nDLUCY8yzvEW7/9K.', 'admin@domain.su'),         -- 200
-       ('superuser', '$2y$04$to.PaR/wcSn/b0ieuGw3ZOq2sy9BPFhjS5c3nDLUCY8yzvEW7/9K.', 'superuser@domain.su'), -- 200
-       ('superadmin', '$2y$04$r76P41tjVWWBI8dAspu7AuqHpym86Brl1tlSJkX9eOdz.5Den4J.2', 'superadmin@domain.su'); -- 111;
+       ('admin', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'admin@domain.su'),         -- 100
+       ('superuser', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'superuser@domain.su'), -- 100
+       ('superadmin', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'superadmin@domain.su'); -- 100;
 
 insert into roles(name)
 values ('ROLE_USER'),
@@ -307,3 +307,44 @@ values ('Зарегистрирован'),
        ('Диагностика'),
        ('В процессе ремонта'),
        ('Готов к выдаче');
+
+
+insert into orders(created_at, customer_id, applicant_name, applicant_phone, applicant_email,
+                   executor_id, model_id, subject, description, deadline,
+                   status_id, serial_number, total_price)
+values ('2022-05-05T00:00:00', 1, 'Иван', '123-345-56-67', 'ivan@domain.su',
+        1, 1, 'ремонт', 'замена бака', '2022-05-25T00:00:00', 1, 'TD19562T', 45),
+
+       ('2022-05-06T00:00:00', 1, 'Петр', '456-234-77-88', 'peter@domain.su',
+        2, 2, 'ремонт', 'замена помпы', '2022-05-27T00:00:00', 2, 'CN578303T', 80),
+
+       ('2022-05-07T00:00:00', 2, 'Дмитрий', '923-567-12-89', 'dmitry@domain.su',
+        3, 5, 'диагностика', 'не морозит', '2022-05-28T00:00:00', 3, 'FT78G53K', 99),
+
+       ('2022-05-07T00:00:00', 2, 'Александр', '357-146-66-34', 'alexander@domain.su',
+        4, 12, 'ремонт', 'замена фильтра', '2022-05-29T00:00:00', 4, 'DT7832L98RU', 120),
+
+       ('2022-05-07T00:00:00', 1, 'Григорий', '676-278-23-78', 'grigory@domain.su',
+        5, 16, 'ремонт', 'замена экрана', '2022-06-12T00:00:00', 5, 'KV538F934T', 200);
+
+
+/*
+insert into orders(created_at, customer_id, applicant_name, applicant_phone, applicant_email,
+                   executor_id, model_id, brand_id, category_id, subject, description, deadline,
+                   status_id, serial_number, total_price)
+values ('2022-05-05T00:00:00', 1, 'Иван', '123-345-56-67', 'ivan@domain.su',
+        1, 1, 1, 1, 'ремонт', 'замена бака', '2022-05-25T00:00:00', 1, 'TD19562T', 45),
+
+       ('2022-05-06T00:00:00', 1, 'Петр', '456-234-77-88', 'peter@domain.su',
+        2, 2, 2, 1, 'ремонт', 'замена помпы', '2022-05-27T00:00:00', 2, 'CN578303T', 80),
+
+       ('2022-05-07T00:00:00', 2, 'Дмитрий', '923-567-12-89', 'dmitry@domain.su',
+        3, 5, 1, 2, 'диагностика', 'не морозит', '2022-05-28T00:00:00', 3, 'FT78G53K', 99),
+
+       ('2022-05-07T00:00:00', 2, 'Александр', '357-146-66-34', 'alexander@domain.su',
+        4, 12, 2, 3, 'ремонт', 'замена фильтра', '2022-05-29T00:00:00', 4, 'DT7832L98RU', 120),
+
+       ('2022-05-07T00:00:00', 1, 'Григорий', '676-278-23-78', 'grigory@domain.su',
+        5, 16, 9, 4, 'ремонт', 'замена экрана', '2022-06-12T00:00:00', 5, 'KV538F934T', 200);
+
+*/
