@@ -8,12 +8,20 @@
         $routeProvider
             .when('/', {
                 templateUrl: 'front_page/front_page.html',
-                controller: 'frontPageController'
+                controller: 'frontPageController',
+                requireLogin: false
             })
 
             .when('/order_request', {
                 templateUrl: 'order_request/order_request.html',
-                controller: 'orderRequestController'
+                controller: 'orderRequestController',
+                requireLogin: true
+
+            })
+
+            .when('/order_list', {
+                templateUrl: 'order_list/order_list.html',
+                controller: 'orderListController'
             })
 
             .when('/order_status/:orderId', {
@@ -120,5 +128,20 @@ angular.module('fx-front').controller('indexController', function ($rootScope, $
         }
     }
 
+    $rootScope.isNotLogged = function () {
+        if (userLogin != 'user') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    $scope.markSelectorBackgroundAsUndefined = function (selectorId) {
+        document.getElementById(selectorId).style.backgroundColor = "#dc7c7c";
+    }
+
+    $scope.markSelectorBackgroundAsDefined = function (selectorId) {
+        document.getElementById(selectorId).style.backgroundColor = "#c8f6b4";
+    }
 
 });

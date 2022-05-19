@@ -41,6 +41,12 @@ public class Category {
     @Column(name="img_height")
     private String imgHeight;
 
+    @Column(name="brief_description")
+    private String briefDescription;
+
+    @Column(name="full_description")
+    private String fullDescription;
+
     @OneToMany(mappedBy = "category")
     @ToString.Exclude
     private List<Model> models;
@@ -49,11 +55,23 @@ public class Category {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Category category)) return false;
-        return id != null && Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(models, category.models);
+        return id != null &&
+                Objects.equals(id, category.id) &&
+                Objects.equals(name, category.name) &&
+                Objects.equals(models, category.models) &&
+                Objects.equals(image, category.image) &&
+                Objects.equals(description, category.description) &&
+                Objects.equals(urlPath, category.urlPath) &&
+                Objects.equals(altText, category.altText) &&
+                Objects.equals(imgWidth, category.imgWidth) &&
+                Objects.equals(imgHeight, category.imgHeight) &&
+                Objects.equals(briefDescription, category.briefDescription) &&
+                Objects.equals(fullDescription, category.fullDescription);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, models);
+        return Objects.hash(id, name, models, image, description, urlPath,
+                altText, imgWidth, imgHeight, briefDescription, fullDescription );
     }
 }
