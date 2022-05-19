@@ -24,27 +24,30 @@
                    ng-model="newOrder.applicantEmail">
 
             <br>
-            <div ng-hide="newOrder.model">
+            <div ng-show="newOrder.model">
                 <label for="productBrand">
                     Брэнд продукта (появится после выбора модели продукта)</label><br>
                 <div id="productBrand" class="form-control">
-                    Брэнд: {{newOrder.model.brand}}
+                    Брэнд: {{newOrder.model.brand.name}}
                 </div>
                 <br>
 
                 <label for="productCategory">
                     Категория продукта (появится после выбора модели продукта)</label><br>
                 <div id="productCategory" class="form-control">
-                    Категория: {{newOrder.model.category}}</div>
-    
+                    Категория: {{newOrder.model.category.name}}
+                </div>
+
                 <br>
             </div>
-            
+
             <label for="productModel">Выберите модель продукта</label><br>
-            <select  id="productModel"
+            <select id="productModel"
                     ng-options="x.name for x in orderPageModelsData.content"
                     class="form-select"
-                     ng-model="newOrder.model">
+                    ng-model="newOrder.model"
+                    ng-change="markSelectorBackgroundAsDefined('productModel')">
+
             </select>
 
             <br>
@@ -59,14 +62,31 @@
             <label for="clientSubject">Кратко опишите что не работает</label><br>
             <input id="clientSubject" class="form-control" type="text"
                    placeholder="Что не работает"
-                   ng-model="newOrder.subject">
+                   ng-model="newOrder.clientSubject">
 
             <br>
 
             <label for="clientDescription">Кратко опишите как была обнаружена неисправность</label><br>
-            <input  id="clientDescription" class="form-control" type="text"
-                    placeholder="Описание неисправности"
-                    ng-model="newOrder.description">
+            <input id="clientDescription" class="form-control" type="text"
+                   placeholder="Описание неисправности"
+                   ng-model="newOrder.clientDescription">
+
+            <br>
+            <label for="productPreviewComment">Результаты осмотра продукта</label><br>
+            <input id="productPreviewComment" class="form-control" type="text"
+                   placeholder="Введите результаты осмотра продукта"
+                   ng-model="newOrder.productPreviewComment">
+
+            <br>
+
+            <label for="warranty">Выберите тип гарантии</label><br>
+            <select id="warranty"
+                    ng-options="x.name for x in orderPageWarrantyData"
+                    class="form-select"
+                    ng-model="newOrder.warranty"
+                    ng-change="markSelectorBackgroundAsDefined('warranty')">
+
+            </select>
 
             <br>
 
@@ -74,35 +94,79 @@
             <select id="serviceEngineerDesignated"
                     ng-options="x.login for x in orderPageServiceEngineerData"
                     class="form-select"
-                    ng-model="newOrder.executor">
+                    ng-model="newOrder.executor"
+                    ng-change="markSelectorBackgroundAsDefined('serviceEngineerDesignated')">
             </select>
 
             <br>
+            <label for="seDiagnosticsComment">Комментарий мастера по диагностике продукта</label><br>
+            <input id="seDiagnosticsComment" class="form-control" type="text"
+                   placeholder="Введите комментарий мастера по диагностике"
+                   ng-model="newOrder.seDiagnosticsComment">
 
-            <label for="clientDeadline">Назначьте дату завершения ремонта в формате ГГГГ-ММ-ДД (Пример: 2022-04-30)</label><br>
+            <br>
+
+            <label for="seProvisionalRepairCost">Предварительная стоимость ремонта от мастера &#8381;</label><br>
+            <input id="seProvisionalRepairCost" class="form-control" type="text"
+                   placeholder="Введите предварительную стоимость ремонта от мастера &#8381;"
+                   ng-model="newOrder.seProvisionalRepairCost">
+
+            <br>
+
+
+            <label for="clientDeadline">Назначьте дату завершения ремонта в формате ГГГГ-ММ-ДД (Пример:
+                2022-04-30)</label><br>
             <input id="clientDeadline" class="form-control" type="text"
                    placeholder="Дата завершения ремонта (в формате ГГГГ-ММ-ДД [Пример: 2022-04-30])"
                    ng-model="newOrder.deadline">
 
             <br>
 
+            <label for="seRepairComment">Комментарий мастера к ремонту</label><br>
+            <input id="seRepairComment" class="form-control" type="text"
+                   placeholder="Введите комментарий мастера к ремонту"
+                   ng-model="newOrder.seRepairComment">
+
+            <br>
+
             <label for="repairStatus">Выберите статус ремонта</label><br>
-            <select  id="repairStatus"
+            <select id="repairStatus"
                     ng-options="x.name for x in orderPageStatusData"
                     class="form-select"
-                    ng-model="newOrder.status">
+                    ng-model="newOrder.status"
+                    ng-change="markSelectorBackgroundAsDefined('repairStatus')">
             </select>
 
             <br>
 
-            <label for="repairTotalPrice">Введите полную сумму ремонта</label><br>
+            <label for="repairTotalPrice">Введите полную сумму ремонта &#8381;</label><br>
             <input id="repairTotalPrice" class="form-control" type="text"
-                   placeholder="Полная сумма ремонта"
+                   placeholder="Полная сумма ремонта &#8381;"
                    ng-model="newOrder.totalPrice">
 
             <br>
 
-            <button type="submit" class="btn btn-primary">Создать заказ</button>
+<!--            <div ng-If="!isWarrantyRepair()">-->
+<!--                <label for="repairWarrantyPriceNotZero">Сумма не гарантийного ремонта &#8381;</label><br>-->
+<!--                <input id="repairWarrantyPriceNotZero" class="form-control" type="text"-->
+<!--                       ng-value="newOrder.totalPrice"-->
+<!--                       ng-model="newOrder.warrantyPrice"-->
+<!--                       ng-disabled="true">-->
+<!--            </div>-->
+
+<!--            <div ng-If="isWarrantyRepair()">-->
+<!--                <label for="repairWarrantyPriceZero">Сумма гарантийного ремонта &#8381;</label><br>-->
+<!--                <input id="repairWarrantyPriceZero" class="form-control" type="text"-->
+<!--                       ng-value="0.00"-->
+<!--                       ng-model="newOrder.warrantyPrice"-->
+<!--                       ng-disabled="true">-->
+<!--            </div>-->
+<!--            &lt;!&ndash;                   placeholder="Полная сумма ремонта &#8381;"&ndash;&gt;-->
+
+<!--            <br>-->
+
+
+            <button ng-disabled="!isUserLoggedIn()" type="submit" class="btn btn-primary">Создать заказ</button>
         </form>
     </div>
 </div>

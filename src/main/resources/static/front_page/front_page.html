@@ -1,12 +1,19 @@
 <div id="fxNgAppSection">
 
-    <div class="categoryTile" ng-repeat="p in allCategoriesPage">
-        <div class="categoryImageContainer">
-            <a ng-href="{{urlPath}}/{{p.id}}"><img ng-src="images/{{p.image}}" alt="{{p.altText}}"
-                                                   width="{{p.imgWidth}}" height="{{p.imgHeight}}"/></a>
+<!--    <div class="container">-->
+        <div class="categoryTileDescriptionContainer" ng-repeat="p in allCategoriesPage">
+            <div class="categoryTile">
+                <div class="categoryImageContainer">
+                    <a ng-href="{{urlPath}}/{{p.id}}"><img ng-src="images/{{p.image}}" alt="{{p.altText}}"
+                                                           width="{{p.imgWidth}}" height="{{p.imgHeight}}"/></a>
+                </div>
+                <div class="categoryCaptionContainer">
+                    <span class="frontPageCategoryCaptionFont"> {{p.description}}</span>
+                </div>
+            </div>
+            <div class="categoryBriefDescriptionContainer">
+                {{p.briefDescription}}
+            </div>
         </div>
-        <div class="categoryCaptionContainer">
-            <span class="frontPageCategoryCaptionFont"> {{p.description}}</span>
-        </div>
-    </div>
+<!--    </div>-->
 </div>

@@ -18,4 +18,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             nativeQuery = true)
     Page<Order> findAllOrders(Pageable pageable);
 
+//    List<Order> findById
+
 }

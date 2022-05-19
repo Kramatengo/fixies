@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,5 +19,6 @@ public class CategoryDto {
     private String altText;
     private String imgWidth;
     private String imgHeight;
-
+    private String briefDescription;
+    private String fullDescription;
 }

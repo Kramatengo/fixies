@@ -12,21 +12,31 @@ public interface ModelMapper {
     ModelMapper INSTANCE = Mappers.getMapper(ModelMapper.class);
 
     Brand dtoToBrand(BrandDto brandDto);
+
     BrandDto brandToDto(Brand brand);
 
     Category dtoToCategory(CategoryDto categoryDto);
+
     CategoryDto categoryToDto(Category category);
 
     Model dtoToModel(ModelDto modelDto);
+
     ModelDto modelToDto(Model model);
 
+    Order dtoToOrder(OrderDto orderDto);
+
+    OrderDto orderToDto(Order order);
+
     User dtoToUser(UserDto userDto);
+
     UserDto userToDto(User user);
 
     Role dtoToRole(RoleDto roleDto);
+
     RoleDto roleToDto(Role role);
 
     Spare spareDtoToSpare(SpareDto spareDto);
+
     SpareDto spareToSpareDto(Spare spare);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -38,8 +48,16 @@ public interface ModelMapper {
     }
 
     Status statusDtoToStatus(StatusDto statusDto);
+
     StatusDto statusToStatusDto(Status status);
+
+    Warranty warrantyDtoToWarranty(WarrantyDto warrantyDto);
+
+    WarrantyDto warrantyToWarrantyDto(Warranty warranty);
+
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateStatusFromStatusDto(StatusDto statusDto, @MappingTarget Status status);
+
+
 }

@@ -39,4 +39,9 @@ public class CategoryController {
         categoryService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/model/{id}")
+    public ResponseEntity<CategoryDto> getBrandByModelId(@PathVariable long id) {
+        return new ResponseEntity<>(categoryService.findByModelId(id), HttpStatus.OK);
+    }
 }
