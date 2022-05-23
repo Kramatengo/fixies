@@ -1,10 +1,12 @@
 package ru.fixies.services;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Service;
 import ru.fixies.dtos.ModelDto;
 import ru.fixies.dtos.OrderDto;
 import ru.fixies.dtos.UserDto;
+import ru.fixies.exceptions.DataValidationException;
 import ru.fixies.exceptions.ResourceNotFoundException;
 import ru.fixies.mapper.ModelMapper;
 import ru.fixies.models.*;
@@ -12,6 +14,7 @@ import ru.fixies.repositories.OrderRepository;
 
 import javax.transaction.Transactional;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,6 +31,11 @@ public class OrderService {
 
     @Transactional
     public void createOrder(Principal principal, OrderDto orderDto) {
+        if (!validateEmail(orderDto.getApplicantEmail())) {
+            ArrayList<String> messages = new ArrayList<>();
+            messages.add("Введен не корректный email " + orderDto.getApplicantEmail());
+            throw new DataValidationException(messages);
+        }
 
         User user = userService.findByLogin(principal.getName()).orElseThrow(() -> new ResourceNotFoundException("Не удалось найти пользователя при оформлении заказа. Имя пользователя: " + principal.getName()));
         Order order = new Order();
@@ -98,5 +106,9 @@ public class OrderService {
     public OrderDto findById(long id) {
         Optional<Order> order = orderRepository.findById(id);
         return order.map(ModelMapper.INSTANCE::orderToDto).orElse(null);
+    }
+
+    private boolean validateEmail(String email) {
+        return EmailValidator.getInstance().isValid(email);
     }
 }
