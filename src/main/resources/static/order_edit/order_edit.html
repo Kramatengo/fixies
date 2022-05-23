@@ -1,6 +1,158 @@
 <div id="fxNgAppSection">
 
+    <h3>Редактировать заявку на ремонт # <strong>{{updated_order.id}}</strong></h3>
 
-    order_edit
+    <div class="orderFormContainer">
+        <form novalidate ng-submit="updateOrder()">
+            <label for="clientName">Имя клиента</label><br>
+            <input id="clientName" class="form-control" type="text"
+                   ng-model="updated_order.applicantName">
 
-</div>  <!-- id="fxNgAppSection"  -->
+            <br>
+
+            <label for="clientPhone">Телефон клиента</label><br>
+            <input id="clientPhone" class="form-control" type="text"
+                   ng-model="updated_order.applicantPhone">
+
+            <br>
+
+            <label for="clientEmail">Email клиента</label><br>
+            <input id="clientEmail" class="form-control" type="text"
+                   ng-model="updated_order.applicantEmail">
+
+            <br>
+            <div ng-hide="newOrder.model">
+                <label for="productBrand">
+                    Брэнд продукта</label><br>
+                <input id="productBrand" class="form-control" type="text"
+                       ng-model="updated_order.model.brand.name"
+                       ng-disabled="true">
+                <br>
+
+                <label for="productCategory">
+                    Категория продукта</label><br>
+                <input id="productCategory" class="form-control" type="text"
+                       ng-model="updated_order.model.category.name"
+                       ng-disabled="true">
+
+                <br>
+            </div>
+
+            <label for="productModel">Модель продукта. Текущая модель : {{updated_order.model.name}}</label><br>
+            <select id="productModel"
+                    ng-options="x.name for x in orderPageModelsData.content"
+                    class="form-select"
+                    ng-model="updated_order.model">
+            </select>
+
+
+            <br>
+
+            <label for="productSerialNumber">Серийный номер продукта</label><br>
+            <input id="productSerialNumber" class="form-control" type="text"
+                   ng-model="updated_order.serialNumber">
+
+            <br>
+
+            <label for="clientSubject">Что не работает от клиента</label><br>
+            <input id="clientSubject" class="form-control" type="text"
+                   ng-model="updated_order.clientSubject">
+
+            <br>
+
+            <label for="clientDescription">Описание неисправности от клиента</label><br>
+            <input id="clientDescription" class="form-control" type="text"
+                   ng-model="updated_order.clientDescription">
+
+            <br>
+
+            <label for="productPreviewComment">Результаты осмотра продукта</label><br>
+            <input id="productPreviewComment" class="form-control" type="text"
+                   ng-model="updated_order.productPreviewComment">
+
+            <br>
+
+            <label for="warranty">Тип гарантии. Текущая гарантия : {{updated_order.warranty.name}}</label><br>
+            <select id="warranty"
+                    ng-options="x.name for x in orderPageWarrantyData"
+                    class="form-select"
+                    ng-model="updated_order.warranty">
+            </select>
+
+            <!--            <input id="warranty" class="form-control" type="text"-->
+            <!--                   ng-model="updated_order.warranty.name">-->
+
+            <br>
+
+
+            <label for="serviceEngineerDesignated">Исполнитель. (Текущий исполнитель :
+                {{updated_order.executor.login}})</label><br>
+            <select id="serviceEngineerDesignated"
+                    ng-options="x.login for x in orderPageServiceEngineerData"
+                    class="form-select"
+                    ng-model="updated_order.executor">
+            </select>
+
+
+            <!--            <input id="serviceEngineerDesignated" class="form-control" type="text"-->
+            <!--                   ng-model="updated_order.executor.login"-->
+            <!--                   ng-disabled="true">-->
+
+
+            <label for="seDiagnosticsComment">Комментарий мастера по диагностике продукта</label><br>
+            <input id="seDiagnosticsComment" class="form-control" type="text"
+                   ng-model="updated_order.seDiagnosticsComment">
+
+            <br>
+
+            <label for="seProvisionalRepairCost">Предварительная стоимость ремонта от мастера &#8381;</label><br>
+            <input id="seProvisionalRepairCost" class="form-control" type="text"
+                   ng-model="updated_order.seProvisionalRepairCost">
+
+            <br>
+
+            <label for="clientDeadline">Дата завершения ремонта в формате ГГГГ-ММ-ДД (Пример:
+                2022-04-30)</label><br>
+            <input id="clientDeadline" class="form-control" type="text"
+                   ng-model="updated_order.deadline">
+
+            <br>
+
+
+            <label for="seRepairComment">Комментарий мастера к ремонту</label><br>
+            <input id="seRepairComment" class="form-control" type="text"
+                   ng-model="updated_order.seRepairComment">
+
+            <br>
+
+
+            <!--                        <select id="serviceEngineerDesignated"-->
+            <!--                                ng-options="x.login for x in orderPageServiceEngineerData"-->
+            <!--                                class="form-select"-->
+            <!--                                ng-model="updated_order.executor.login">-->
+            <!--                        </select>-->
+            <br>
+
+
+            <label for="repairStatus">Статус ремонта. Текущий статус : {{updated_order.status.name}}</label><br>
+            <select id="repairStatus"
+                    ng-options="x.name for x in orderPageStatusData"
+                    class="form-select"
+                    ng-model="updated_order.status">
+            </select>
+
+            <!--            <input id="repairStatus" class="form-control" type="text"-->
+            <!--                   ng-model="updated_order.status.name">-->
+
+            <br>
+
+            <label for="repairTotalPrice">Полная сумма ремонта &#8381;</label><br>
+            <input id="repairTotalPrice" class="form-control" type="text"
+                   ng-model="updated_order.totalPrice">
+
+            <br>
+
+            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        </form>
+    </div>
+</div>

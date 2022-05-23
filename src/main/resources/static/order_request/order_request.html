@@ -4,105 +4,157 @@
 
     <div class="orderFormContainer">
         <form novalidate ng-submit="createOrder()">
-            <label for="clientName">Введите имя клиента</label><br>
-            <input id="clientName" class="form-control" type="text"
-                   placeholder="Имя клиента"
-                   ng-model="newOrder.applicantName">
+            <div class="orderFormSection">
+                <label for="clientName">Введите имя клиента</label><br>
+                <input id="clientName" class="form-control" type="text"
+                       placeholder="Имя клиента"
+                       ng-model="newOrder.applicantName"
+                       ng-change="markSelectorBackgroundAsDefined('clientName')">
+            </div>
 
-            <br>
+            <div class="orderFormSection">
+                <label for="clientPhone">Введите телефон клиента</label><br>
+                <input id="clientPhone" class="form-control" type="text"
+                       placeholder="Телефон клиента"
+                       ng-model="newOrder.applicantPhone"
+                       ng-change="markSelectorBackgroundAsDefined('clientPhone')">
 
-            <label for="clientPhone">Введите телефон клиента</label><br>
-            <input id="clientPhone" class="form-control" type="text"
-                   placeholder="Телефон клиента"
-                   ng-model="newOrder.applicantPhone">
+            </div>
 
-            <br>
+            <div class="orderFormSection">
+                <label for="clientEmail">Введите email клиента</label><br>
+                <input id="clientEmail" class="form-control" type="text"
+                       placeholder="e-mail клиента"
+                       ng-model="newOrder.applicantEmail"
+                       ng-change="markSelectorBackgroundAsDefined('clientEmail')">
+            </div>
 
-            <label for="clientEmail">Введите email клиента</label><br>
-            <input id="clientEmail" class="form-control" type="text"
-                   placeholder="e-mail клиента"
-                   ng-model="newOrder.applicantEmail">
-
-            <br>
-            <div ng-hide="newOrder.model">
+            <div ng-show="newOrder.model">
                 <label for="productBrand">
                     Брэнд продукта (появится после выбора модели продукта)</label><br>
                 <div id="productBrand" class="form-control">
-                    Брэнд: {{newOrder.model.brand}}
+                    Брэнд: {{newOrder.model.brand.name}}
                 </div>
                 <br>
 
                 <label for="productCategory">
                     Категория продукта (появится после выбора модели продукта)</label><br>
                 <div id="productCategory" class="form-control">
-                    Категория: {{newOrder.model.category}}</div>
-    
+                    Категория: {{newOrder.model.category.name}}
+                </div>
+
                 <br>
             </div>
-            
-            <label for="productModel">Выберите модель продукта</label><br>
-            <select  id="productModel"
-                    ng-options="x.name for x in orderPageModelsData.content"
-                    class="form-select"
-                     ng-model="newOrder.model">
-            </select>
 
-            <br>
+            <div class="orderFormSection">
+                <label for="productModel">Выберите модель продукта</label><br>
+                <select id="productModel"
+                        ng-model="newOrder.model"
+                        ng-options="x.name for x in orderPageModelsData.content"
+                        class="form-select"
+                        ng-change="markSelectorBackgroundAsDefined('productModel')">
+                </select>
+            </div>
 
-            <label for="productSerialNumber">Ведите серийный номер продукта</label><br>
-            <input id="productSerialNumber" class="form-control" type="text"
-                   placeholder="Серийный номер"
-                   ng-model="newOrder.serialNumber">
+            <div class="orderFormSection">
+                <label for="productSerialNumber">Ведите серийный номер продукта</label><br>
+                <input id="productSerialNumber" class="form-control" type="text"
+                       placeholder="Серийный номер"
+                       ng-model="newOrder.serialNumber">
+            </div>
 
-            <br>
+            <div class="orderFormSection">
+                <label for="clientSubject">Кратко опишите что не работает</label><br>
+                <input id="clientSubject" class="form-control" type="text"
+                       placeholder="Что не работает"
+                       ng-model="newOrder.clientSubject">
+            </div>
 
-            <label for="clientSubject">Кратко опишите что не работает</label><br>
-            <input id="clientSubject" class="form-control" type="text"
-                   placeholder="Что не работает"
-                   ng-model="newOrder.subject">
+            <div class="orderFormSection">
+                <label for="clientDescription">Кратко опишите как была обнаружена неисправность</label><br>
+                <input id="clientDescription" class="form-control" type="text"
+                       placeholder="Описание неисправности"
+                       ng-model="newOrder.clientDescription">
+            </div>
 
-            <br>
+            <div class="orderFormSection" ng-show="!isUserIsUser()">
+                <label for="productPreviewComment">Результаты осмотра продукта</label><br>
+                <input id="productPreviewComment" class="form-control" type="text"
+                       placeholder="Введите результаты осмотра продукта"
+                       ng-model="newOrder.productPreviewComment">
+            </div>
 
-            <label for="clientDescription">Кратко опишите как была обнаружена неисправность</label><br>
-            <input  id="clientDescription" class="form-control" type="text"
-                    placeholder="Описание неисправности"
-                    ng-model="newOrder.description">
+            <div class="orderFormSection" ng-show="!isUserIsUser()">
+                <label for="warranty">Выберите тип гарантии. Текущая гарантия : {{newOrder.warranty.name}}</label><br>
+                <select id="warranty"
+                        ng-options="x.name for x in orderPageWarrantyData"
+                        class="form-select"
+                        ng-model="newOrder.warranty"
+                        ng-change="markSelectorBackgroundAsDefined('warranty')">
+                    <!--                        ng-init="newOrder.warranty = orderPageWarrantyData[0]"-->
 
-            <br>
+                </select>
+            </div>
+            <div class="orderFormSection" ng-show="!isUserIsUser()">
+                <label for="serviceEngineerDesignated">Назначьте мастера по
+                    ремонту</label><br>
+                <select id="serviceEngineerDesignated"
+                        ng-options="x.login for x in orderPageServiceEngineerData"
+                        class="form-select"
+                        ng-model="newOrder.executor"
+                        ng-change="markSelectorBackgroundAsDefined('serviceEngineerDesignated')">
+                </select>
+            </div>
 
-            <label for="serviceEngineerDesignated">Назначьте мастера по ремонту</label><br>
-            <select id="serviceEngineerDesignated"
-                    ng-options="x.login for x in orderPageServiceEngineerData"
-                    class="form-select"
-                    ng-model="newOrder.executor">
-            </select>
+            <div class="orderFormSection" ng-show="!isUserIsUser()">
+                <label for="seDiagnosticsComment">Комментарий мастера по диагностике
+                    продукта</label><br>
+                <input id="seDiagnosticsComment" class="form-control" type="text"
+                       placeholder="Введите комментарий мастера по диагностике"
+                       ng-model="newOrder.seDiagnosticsComment">
+            </div>
 
-            <br>
+            <div class="orderFormSection" ng-show="!isUserIsUser()">
+                <label for="seProvisionalRepairCost">Предварительная стоимость ремонта от мастера
+                    &#8381;</label><br>
+                <input id="seProvisionalRepairCost" class="form-control" type="text"
+                       placeholder="Введите предварительную стоимость ремонта от мастера &#8381;"
+                       ng-model="newOrder.seProvisionalRepairCost">
+            </div>
 
-            <label for="clientDeadline">Назначьте дату завершения ремонта в формате ГГГГ-ММ-ДД (Пример: 2022-04-30)</label><br>
-            <input id="clientDeadline" class="form-control" type="text"
-                   placeholder="Дата завершения ремонта (в формате ГГГГ-ММ-ДД [Пример: 2022-04-30])"
-                   ng-model="newOrder.deadline">
+            <div class="orderFormSection" ng-show="!isUserIsUser()">
+                <label for="clientDeadline">Назначьте дату завершения ремонта в формате ГГГГ-ММ-ДД (Пример:
+                    2022-04-30)</label><br>
+                <input id="clientDeadline" class="form-control" type="text"
+                       placeholder="Дата завершения ремонта (в формате ГГГГ-ММ-ДД [Пример: 2022-04-30])"
+                       ng-model="newOrder.deadline">
+            </div>
 
-            <br>
+            <div class="orderFormSection" ng-show="!isUserIsUser()">
+                <label for="seRepairComment">Комментарий мастера к ремонту</label><br>
+                <input id="seRepairComment" class="form-control" type="text"
+                       placeholder="Введите комментарий мастера к ремонту"
+                       ng-model="newOrder.seRepairComment">
+            </div>
 
-            <label for="repairStatus">Выберите статус ремонта</label><br>
-            <select  id="repairStatus"
-                    ng-options="x.name for x in orderPageStatusData"
-                    class="form-select"
-                    ng-model="newOrder.status">
-            </select>
+            <div class="orderFormSection" ng-show="!isUserIsUser()">
+                <label for="repairStatus">Выберите статус ремонта</label><br>
+                <select id="repairStatus"
+                        ng-options="x.name for x in orderPageStatusData"
+                        class="form-select"
+                        ng-model="newOrder.status"
+                        ng-change="markSelectorBackgroundAsDefined('repairStatus')">
+                </select>
+            </div>
 
-            <br>
+            <div class="orderFormSection" ng-show="!isUserIsUser()">
+                <label for="repairTotalPrice">Введите полную сумму ремонта &#8381;</label><br>
+                <input id="repairTotalPrice" class="form-control" type="text"
+                       placeholder="Полная сумма ремонта &#8381;"
+                       ng-model="newOrder.totalPrice">
+            </div>
 
-            <label for="repairTotalPrice">Введите полную сумму ремонта</label><br>
-            <input id="repairTotalPrice" class="form-control" type="text"
-                   placeholder="Полная сумма ремонта"
-                   ng-model="newOrder.totalPrice">
-
-            <br>
-
-            <button type="submit" class="btn btn-primary">Создать заказ</button>
+            <button ng-disabled="!isUserLoggedIn()" type="submit" class="btn btn-primary">Создать заказ</button>
         </form>
     </div>
 </div>
