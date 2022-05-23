@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.fixies.models.Brand;
 import ru.fixies.models.Category;
@@ -38,5 +39,7 @@ public interface ModelRepository extends JpaRepository<Model, Long> {
 
     Optional<List<Model>> findByCategoryId(Long categoryId);
 
-
+    @Query(value = "SELECT * FROM models WHERE name LIKE %:partName%",
+            nativeQuery = true)
+    Optional<List<Model>> findByPartName(@Param("partName") String partName);
 }

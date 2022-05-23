@@ -117,4 +117,9 @@ public class ModelService {
         modelRepository.deleteById(id);
     }
 
+    @Transactional(readOnly = true)
+    public List<ModelDto> findByNameLike(String partName) {
+        List<Model> models = modelRepository.findByPartName(partName).orElse(new ArrayList<>());
+        return models.stream().map(ModelMapper.INSTANCE::modelToDto).collect(Collectors.toList());
+    }
 }

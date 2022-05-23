@@ -72,4 +72,9 @@ public class ModelController {
         return new ResponseEntity<>(modelService.findByBrandId(selectedBrandId), HttpStatus.OK);
     }
 
+    @GetMapping("/by_name/{partName}")
+    public ResponseEntity<List<ModelDto>> findModelsByPartName(@PathVariable String partName) {
+        return new ResponseEntity<>(modelService.findByNameLike(partName), HttpStatus.OK);
+    }
+
 }
