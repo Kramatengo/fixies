@@ -33,7 +33,7 @@ public class ModelController {
         ModelDto save = modelService.save(modelDto);
 
         ModelDto savedModel = ModelMapper.INSTANCE.modelToDto(modelService.findByName(save.getName()));
-        return new ResponseEntity<>(savedModel, HttpStatus.OK);
+        return new ResponseEntity<>(savedModel, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -48,13 +48,20 @@ public class ModelController {
     }
 
     @GetMapping("{selectedBrandId}/{selectedCategoryId}")
-    public List<ru.fixies.dtos.ModelDto>  findModelsBySelectedBrand(@PathVariable ("selectedBrandId") long selectedBrandId, @PathVariable ("selectedCategoryId") Long selectedCategoryId) {
-        return Collections.emptyList();
+    public ResponseEntity<List<ModelDto>>  findModelsBySelectedBrandAndCategory(
+            @PathVariable ("selectedBrandId") long selectedBrandId,
+            @PathVariable ("selectedCategoryId") Long selectedCategoryId) {
+        return new ResponseEntity<>(modelService.findByBrandIdAndCategoryId(selectedBrandId, selectedCategoryId), HttpStatus.OK);
     }
 
     @GetMapping("/by_category/{selectedCategoryId}")
-    public List<ru.fixies.dtos.ModelDto> findBrandsBySelectedCategory(@PathVariable long selectedCategoryId) {
-        return Collections.emptyList();
-
+    public ResponseEntity<List<ModelDto>> findModelsBySelectedCategory(@PathVariable long selectedCategoryId) {
+        return new ResponseEntity<>(modelService.findByCategoryId(selectedCategoryId), HttpStatus.OK);
     }
+
+    @GetMapping("/by_brand/{selectedBrandId}")
+    public ResponseEntity<List<ModelDto>> findModelsBySelectedBrand(@PathVariable long selectedBrandId) {
+        return new ResponseEntity<>(modelService.findByBrandId(selectedBrandId), HttpStatus.OK);
+    }
+
 }
