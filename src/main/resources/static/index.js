@@ -8,12 +8,20 @@
         $routeProvider
             .when('/', {
                 templateUrl: 'front_page/front_page.html',
-                controller: 'frontPageController'
+                controller: 'frontPageController',
+                requireLogin: false
             })
 
             .when('/order_request', {
                 templateUrl: 'order_request/order_request.html',
-                controller: 'orderRequestController'
+                controller: 'orderRequestController',
+                requireLogin: true
+
+            })
+
+            .when('/order_list', {
+                templateUrl: 'order_list/order_list.html',
+                controller: 'orderListController'
             })
 
             .when('/order_status/:orderId', {
@@ -35,6 +43,17 @@
                 templateUrl: 'create_user/create_user.html',
                 controller: 'createUserController'
             })
+
+            .when('/promo_page/:categoryId', {
+                templateUrl: 'promo_page/promo_page.html',
+                controller: 'promotionController'
+            })
+
+            .when('/about', {
+                templateUrl: 'about/about.html',
+                controller: 'aboutController'
+            })
+
             .otherwise({
                 redirectTo: '/'
             });
@@ -120,5 +139,31 @@ angular.module('fx-front').controller('indexController', function ($rootScope, $
         }
     }
 
+    $rootScope.isUserIsUser = function () {
+        if (userLogin == 'user') {
+            //  todo: Доделать DTO для user и admin при контроле ввода выпадающих меню
+            return true;
+        } else {
+            return false;
+
+        }
+    }
+
+
+    $rootScope.isNotLogged = function () {
+        if (userLogin != 'user') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    $scope.markSelectorBackgroundAsUndefined = function (selectorId) {
+        document.getElementById(selectorId).style.backgroundColor = "#dc7c7c";
+    }
+
+    $scope.markSelectorBackgroundAsDefined = function (selectorId) {
+        document.getElementById(selectorId).style.backgroundColor = "#c8f6b4";
+    }
 
 });

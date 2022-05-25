@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -15,13 +16,24 @@ public class OrderDto {
     private Long id;
     private LocalDateTime createdAt;
     private UserDto customer;
+    private String applicantName;
+    private String applicantPhone;
+    private String applicantEmail;
     private UserDto executor;
     private ModelDto model;
-    private String subject;
-    private String description;
-    private LocalDateTime deadline;
+    private String clientSubject;
+    private String clientDescription;
+    private String productPreviewComment;
+    private String seDiagnosticsComment;
+    private BigDecimal seProvisionalRepairCost;
+    private String seRepairComment;
+    private Date deadline;
+    //    private LocalDateTime deadline;
     private StatusDto status;
+    private WarrantyDto warranty;
     private String serialNumber;
     private BigDecimal totalPrice;
+    private BigDecimal warrantyPrice;
+
 
 }
