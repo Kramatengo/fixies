@@ -25,7 +25,7 @@ body {
     margin-left: auto;
     display: block;
 
-    border: 3px solid red;
+    /*border: 3px solid red;*/
 
     position: relative;
 
@@ -41,7 +41,7 @@ body {
     width: 100%;
     max-width: 1200px;
     background-color: white;
-    border: 3px solid magenta;
+    /*border: 3px solid magenta;*/
     content: "";
     display: table;
 
@@ -69,7 +69,7 @@ body {
     margin: auto;
     padding: 50px;
 
-    border: 3px solid green;
+    /*border: 3px solid green;*/
 
     background-color: white;
     position: relative;
@@ -143,7 +143,7 @@ body {
     margin-right: auto;
     margin-left: auto;
 
-    border: 1px solid cyan;
+    /*border: 1px solid cyan;*/
 
     background-color: lightgrey;
     float: left;
@@ -229,7 +229,7 @@ body {
     margin-right: auto;
     margin-left: auto;
 
-    border: 1px solid cyan;
+    /*border: 1px solid cyan;*/
 
     background-color: white;
     float: left;
@@ -249,7 +249,7 @@ body {
     margin-right: auto;
     margin-left: auto;
 
-    border: 1px solid yellow;
+    border: 1px solid lightgray;
 
     background-color: white;
     float: right;
@@ -265,7 +265,7 @@ body {
     margin-right: auto;
     margin-left: 10px;
 
-    border: 1px solid yellow;
+    border: 1px solid lightgray;
 
     background-color: white;
     float: right;
@@ -281,7 +281,7 @@ body {
     margin-right: auto;
     margin-left: 10px;
 
-    border: 1px solid yellow;
+    border: 1px solid lightgray;
 
     background-color: white;
     float: right;
@@ -297,7 +297,7 @@ body {
     margin-right: auto;
     margin-left: 10px;
 
-    border: 1px solid yellow;
+    border: 1px solid lightgray;
 
     background-color: white;
     float: right;
@@ -314,7 +314,7 @@ body {
     margin-right: auto;
     margin-left: auto;
 
-    border: 1px solid yellow;
+    border: 1px solid lightgray;
 
     background-color: white;
     float: right;
@@ -329,7 +329,7 @@ body {
     margin-right: auto;
     margin-left: auto;
 
-    border: 1px solid red;
+    border: 1px solid lightgray;
 
     background-color: white;
     float: right;
@@ -346,7 +346,7 @@ body {
     margin-right: auto;
     margin-left: auto;
 
-    border: 1px solid blue;
+    border: 1px solid lightgray;
 
     background-color: white;
     float: right;
@@ -428,7 +428,7 @@ body {
     padding: 10px;
     background-color: white;
 
-    border: 1px solid blue;
+    border: 1px solid lightgray;
 
     float: none;
     display: inline-block;
@@ -439,4 +439,42 @@ body {
 
 /*#########################################*/
 /*Order_page - конец*/
+/*#########################################*/
+
+/*#########################################*/
+/*Order_list_page - начало*/
+/*#########################################*/
+
+
+.table tr:hover{
+
+ background-color: #ddd;
+
+}
+
+.table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: lightblue;
+    color: black;
+}
+
+.row {
+    background-color: lightgray;
+    border: 1px solid grey;
+}
+
+.col {
+    background-color: lightgray;
+    border: 1px solid grey;
+
+}
+
+/*#########################################*/
+/*Order_list_page - конец*/
 /*#########################################*/

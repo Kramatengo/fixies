@@ -4,23 +4,17 @@ angular.module('fx-front').controller('orderStatusController', function ($scope,
 
     $scope.displayOrderStatus = function () {
         $http({
-            url: contextPath + '/api/v1/orders/status',
+            url: contextPath + '/api/v1/orders/order_status/' + $routeParams.orderId,
             method: 'GET'
         }).then(function (response) {
-            alert('Ваш заказ успешно сформирован');
-            $scope.newOrder = null;
-            $location.path('/');
-        }, function failureCallback (response) {
-            console.log($scope.newOrder);
-            $scope.newOrder = null;
-            alert(response.data.messages);
+            $scope.orderStatusPage = response.data;
+            console.log($scope.orderStatusPage);
+        }, function failureCallback(response) {
+            console.log(response);
         });
     };
 
 
-    $scope.getModelsForOrderPage();
-    $scope.getRepairStatusesForOrderPage();
-    $scope.getUsersForOrderPage();
-
+    $scope.displayOrderStatus();
 
 });

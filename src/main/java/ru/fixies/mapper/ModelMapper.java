@@ -20,6 +20,9 @@ public interface ModelMapper {
     Model dtoToModel(ModelDto modelDto);
     ModelDto modelToDto(Model model);
 
+    Order dtoToOrder(OrderDto orderDto);
+    OrderDto orderToDto(Order order);
+
     User dtoToUser(UserDto userDto);
     UserDto userToDto(User user);
 
@@ -42,4 +45,9 @@ public interface ModelMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateStatusFromStatusDto(StatusDto statusDto, @MappingTarget Status status);
+
+
+
+
+
 }
