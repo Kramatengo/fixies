@@ -19,7 +19,9 @@ angular.module('fx-front').controller('createUserController', function ($scope, 
                 alert('Пользователь успешно создан');
                 $location.path('/');
             }, function failureCallback(response) {
-                alert(response.data.messages);
+                // alert(response.data.messages);
+                alert(response.data);
+
             });
     }
 });

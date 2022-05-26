@@ -8,12 +8,20 @@
         $routeProvider
             .when('/', {
                 templateUrl: 'front_page/front_page.html',
-                controller: 'frontPageController'
+                controller: 'frontPageController',
+                requireLogin: false
             })
 
             .when('/order_request', {
                 templateUrl: 'order_request/order_request.html',
-                controller: 'orderRequestController'
+                controller: 'orderRequestController',
+                requireLogin: true
+
+            })
+
+            .when('/order_list', {
+                templateUrl: 'order_list/order_list.html',
+                controller: 'orderListController'
             })
 
             .when('/order_status/:orderId', {
@@ -35,6 +43,17 @@
                 templateUrl: 'create_user/create_user.html',
                 controller: 'createUserController'
             })
+
+            .when('/promo_page/:categoryId', {
+                templateUrl: 'promo_page/promo_page.html',
+                controller: 'promotionController'
+            })
+
+            .when('/about', {
+                templateUrl: 'about/about.html',
+                controller: 'aboutController'
+            })
+
             .otherwise({
                 redirectTo: '/'
             });
@@ -61,11 +80,12 @@ angular.module('fx-front').controller('indexController', function ($rootScope, $
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
                     $localStorage.serviceUser = {login: $scope.user.login, token: response.data.token};
-                    userLogin = $localStorage.serviceUser.login;
+                    $scope.userLogin = $localStorage.serviceUser.login;
                     console.log("$localStorage.serviceUser.login = " + $localStorage.serviceUser.login);
                     $scope.user.login = null;
                     $scope.user.password = null;
                 }
+                console.log("$rootScope.isUserIsUser() = " + $rootScope.isUserIsUser());
             }, function errorCallback(response) {
                 console.log('$scope.user.login = ' + $scope.user.login);
                 console.log('$scope.user.password = ' + $scope.user.password);
@@ -97,7 +117,7 @@ angular.module('fx-front').controller('indexController', function ($rootScope, $
     };
 
     $rootScope.isUserAdmin = function () {
-        if (userLogin != 'admin') {
+        if ($scope.userLogin == 'admin') {
             return true;
         } else {
             return false;
@@ -105,7 +125,7 @@ angular.module('fx-front').controller('indexController', function ($rootScope, $
     }
 
     $rootScope.isUserMaster = function () {
-        if (userLogin != 'master') {
+        if ($scope.userLogin == 'master') {
             return true;
         } else {
             return false;
@@ -113,12 +133,38 @@ angular.module('fx-front').controller('indexController', function ($rootScope, $
     }
 
     $rootScope.isUserSuperUser = function () {
-        if (userLogin != 'superuser') {
+        if ($scope.userLogin != 'superuser') {
             return true;
         } else {
             return false;
         }
     }
 
+    $rootScope.isUserIsUser = function () {
+        if ($scope.userLogin == 'user') {
+            //  todo: Доделать DTO для user и admin при контроле ввода выпадающих меню
+            return true;
+        } else {
+            return false;
+
+        }
+    }
+
+
+    $rootScope.isNotLogged = function () {
+        if ($scope.userLogin != 'user') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    $scope.markSelectorBackgroundAsUndefined = function (selectorId) {
+        document.getElementById(selectorId).style.backgroundColor = "#dc7c7c";
+    }
+
+    $scope.markSelectorBackgroundAsDefined = function (selectorId) {
+        document.getElementById(selectorId).style.backgroundColor = "#c8f6b4";
+    }
 
 });

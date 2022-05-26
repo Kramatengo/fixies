@@ -11,11 +11,25 @@ import ru.fixies.models.Order;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query(value = "SELECT orders.* " +
-                    "FROM orders " +
-                    "ORDER BY id DESC ",
+            "FROM orders " +
+            "ORDER BY id DESC ",
             // add countQuery = "SELECT count(*) FROM tbl_cs_models_new" to ORDER BY id
             countQuery = "SELECT count(*) FROM orders",
             nativeQuery = true)
     Page<Order> findAllOrders(Pageable pageable);
+
+//    List<Order> findById
+
+//    @Query(value = "SELECT orders.* " +
+//            "FROM orders " +
+//            "WHERE orders."
+//            "ORDER BY id DESC ",
+//            // add countQuery = "SELECT count(*) FROM tbl_cs_models_new" to ORDER BY id
+//            countQuery = "SELECT count(*) FROM orders",
+//            nativeQuery = true)
+
+//    Page<Order> findByUserId(Pageable pageable);
+
+//    Page<Order> findOrderByCustomerId(Long customerId);
 
 }

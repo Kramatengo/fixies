@@ -34,7 +34,8 @@ public class UserRegController {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping
-    public String save(@RequestBody @Validated UserDto userRegRequest, BindingResult bindingResult) {
+//    public String save(@RequestBody @Validated UserDto userRegRequest, BindingResult bindingResult) {
+    public void save(@RequestBody @Validated UserDto userRegRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new DataValidationException(bindingResult.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList()));
         }
@@ -54,6 +55,6 @@ public class UserRegController {
         userRole.setRoleId(roleService.findByRoleName(INITIAL_USER_ROLE).stream().map(Role::getId).toList().get(0));
         userRolesService.save(userRole);
 
-        return "SUCCESS";
+//        return "SUCCESS";
     }
 }
