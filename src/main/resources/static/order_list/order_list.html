@@ -1,0 +1,35 @@
+<div id="fxNgAppSection">
+
+    <h3>Список заявок на ремонт</h3>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Номер заказа</th>
+            <th scope="col">Модель</th>
+            <th scope="col">Брэнд</th>
+            <th scope="col">Категория</th>
+            <th scope="col">Статус</th>
+            <th scope="col">Стоимость</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="o in allOrderList">
+
+            <th scope="row">{{o.id}}</th>
+            <td>{{o.model.name}}</td>
+            <td>{{o.model.brand.name}}</td>
+            <td>{{o.model.category.name}}</td>
+            <td>{{o.status.name}}</td>
+            <td>{{o.totalPrice}} &#8381;</td>
+            <td><a ng-href="#!/order_status/{{o.id}}">Смотреть</a></td>
+            <td ng-hide="isUserIsUser()"><a ng-href="#!/order_edit/{{o.id}}">Редактировать</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>

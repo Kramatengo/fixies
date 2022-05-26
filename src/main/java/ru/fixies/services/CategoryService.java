@@ -46,4 +46,11 @@ public class CategoryService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+
+    @Transactional(readOnly = true)
+    public CategoryDto findByModelId(Long modelId) {
+        Optional<Category> brand = repository.findByModelId(modelId);
+        return brand.map(ModelMapper.INSTANCE::categoryToDto).orElse(null);
+    }
 }
